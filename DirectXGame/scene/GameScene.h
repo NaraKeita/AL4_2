@@ -3,6 +3,7 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 #include "Player.h"
+#include "PlayerBullet.h"
 
 /// <summary>
 /// ゲームシーン
@@ -43,10 +44,13 @@ private: // メンバ変数
 	Audio* audio_ = nullptr;
 	//自キャラ
 	Player* player_ = nullptr;
+	//弾
+	PlayerBullet* playerBullet_ = nullptr;
 	// プレイヤーのモデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
+	uint32_t bulletText_ = 0;
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	Camera viewProjection_;

@@ -20,6 +20,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	// ファイル名を指定してテクスチャを読み込む
 	textureHandle_ = TextureManager::Load("mario.jpg");
+	bulletText_ = TextureManager::Load("black1x1.png");
 	//
 	model_ = Model::Create();
 	//
@@ -30,7 +31,7 @@ void GameScene::Initialize() {
 	player_ = new Player();
 	// 自キャラの初期化
 	player_->Initialize(model_, textureHandle_/*, &viewProjection_*/);
-
+	
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;
 

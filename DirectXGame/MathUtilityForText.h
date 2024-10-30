@@ -1,8 +1,6 @@
 #pragma once
 
-#include<math.h>
-#include"math\Matrix4x4.h"
-#include"math\Vector3.h"
+#include<KamataEngine.h>
 #include "AABB.h"
 using namespace KamataEngine;
 

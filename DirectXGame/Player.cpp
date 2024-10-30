@@ -1,7 +1,6 @@
 #include "Player.h"
 #include<cassert>
-
-
+#include"MathUtilityForText.h"
 
 void Player::Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* viewProjection*/) {
 	// シングルトンインスタンスを取得する
@@ -17,6 +16,10 @@ void Player::Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* 
 }
 
 void Player::Update() {
+
+	// 行列更新
+	worldTransform_.matWorld_ = MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
+
 	worldTransform_.TransferMatrix();
 
 	//キャラクターの移動ベクトル
@@ -59,11 +62,47 @@ void Player::Update() {
 	worldTransform_.translation_.y = max(worldTransform_.translation_.y, -kMoveLimitY);
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
+	// キャラクター攻撃処理
+	Attack();
+	// 弾更新
+	if (bullet_) {
+		bullet_->Update();
+	}
+
 	worldTransform_.UpdateMatrix();
 
 }
 
-void Player::Draw(Camera& viewProjection) {
-	model_->Draw(worldTransform_, viewProjection, textureHandle_);
+void Player::Draw(Camera& camera) {
+	model_->Draw(worldTransform_, camera, textureHandle_);
+	// 弾更新
+	if (bullet_) {
+		bullet_->Draw(camera);
+	}
+}
 
+void Player::Rotate() {
+	//-----------追加-------------//
+	// 回転速さ[ラジアン/frame]
+	const float kRotSpeed = 0.02f;
+
+	// 押した方向で移動ベクトルを変更
+	if (input_->PushKey(DIK_A)) {
+		worldTransform_.rotation_.y -= kRotSpeed;
+	} else if (input_->PushKey(DIK_D)) {
+		worldTransform_.rotation_.y += kRotSpeed;
+	}
+
+	//---------------------------//
+}
+
+void Player::Attack() {
+	if (input_->TriggerKey(DIK_SPACE)) {
+		// 弾を生成し、初期化
+		PlayerBullet* newBullet = new PlayerBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_);
+
+		// 弾を登録する
+		bullet_ = newBullet;
+	}
 }
