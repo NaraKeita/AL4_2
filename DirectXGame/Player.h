@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerBullet.h"
+#include <list>
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
@@ -8,13 +9,16 @@ public:
 	// キーボード入力
 	Input* input_ = nullptr;
 
+	~Player();
+
 	void Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* viewProjection*/);
 
 	void Update();
 	void Draw(Camera& viewProjection);
 	void Rotate();
 	void Attack();
-	
+
+	std::list<PlayerBullet*> bullets_;
 
 private:
 	//ワールド変換データ
