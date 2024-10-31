@@ -10,6 +10,8 @@ public:
 	/// <param name="textureHandle>テクスチャハンドル</param>
 	void Initialize(Model* model, const Vector3& pos);
 
+
+
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -20,6 +22,9 @@ public:
 	/// </summary>
 	/// <param name="camera>camera(参照渡し)</param>
 	void Draw(const Camera& camera);
+
+
+
 
 private:
 	// ワールド変換データ

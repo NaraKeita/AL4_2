@@ -65,12 +65,18 @@ void Player::Update() {
 
 	// キャラクター攻撃処理
 	Attack();
+
+	// 旋回
+	Rotate();
+
 	// 弾更新
 	for (PlayerBullet* bullet : bullets_) {
 		bullet->Update();
 	}
 
 	worldTransform_.UpdateMatrix();
+
+	
 
 }
 
@@ -84,13 +90,15 @@ void Player::Draw(Camera& camera) {
 
 void Player::Rotate() {
 	//-----------追加-------------//
+	
+	
 	// 回転速さ[ラジアン/frame]
 	const float kRotSpeed = 0.02f;
 
 	// 押した方向で移動ベクトルを変更
-	if (input_->PushKey(DIK_A)) {
+	if (input_->PushKey(DIK_Q)) {
 		worldTransform_.rotation_.y -= kRotSpeed;
-	} else if (input_->PushKey(DIK_D)) {
+	} else if (input_->PushKey(DIK_E)) {
 		worldTransform_.rotation_.y += kRotSpeed;
 	}
 
