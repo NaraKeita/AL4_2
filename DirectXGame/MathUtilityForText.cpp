@@ -30,6 +30,34 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vecto
 	return affin;
 }
 
+Vector3& operator+=(Vector3& Ihv, const Vector3& rhv) { 
+	Ihv.x += rhv.x;
+	Ihv.y += rhv.y;
+	Ihv.z += rhv.z;
+	return Ihv;
+}
+
+Vector3& operator-=(Vector3& Ihv, const Vector3& rhv) {
+	Ihv.x -= rhv.x;
+	Ihv.y -= rhv.y;
+	Ihv.z -= rhv.z;
+	return Ihv;
+}
+
+Vector3& operator*=(Vector3& v, float s) {
+	v.x *= s;
+	v.y *= s;
+	v.z *= s;
+	return v;
+}
+
+Vector3& operator/=(Vector3& v, float s) {
+	v.x /= s;
+	v.y /= s;
+	v.z /= s;
+	return v;
+}
+
 float EaseInOut(float x1, float x2, float t) {
 	float easedT = -(std::cosf(std::numbers::pi_v<float> * t) - 1.0f) / 2.0f;
     return Lerp(x1,x2,easedT);

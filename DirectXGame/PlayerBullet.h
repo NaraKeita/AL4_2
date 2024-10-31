@@ -1,4 +1,5 @@
 #pragma once
+#include <MathUtilityForText.h>
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
@@ -8,7 +9,7 @@ public:
 	/// </summary>
 	/// <param name="model>モデル</param>
 	/// <param name="textureHandle>テクスチャハンドル</param>
-	void Initialize(Model* model, const Vector3& pos);
+	void Initialize(Model* model, const Vector3& pos, const Vector3 velocity);
 
 
 
@@ -23,8 +24,7 @@ public:
 	/// <param name="camera>camera(参照渡し)</param>
 	void Draw(const Camera& camera);
 
-
-
+	Vector3 velocity_;
 
 private:
 	// ワールド変換データ

@@ -3,7 +3,7 @@
 #include<cassert>
 
 
-void PlayerBullet::Initialize(Model* model, const Vector3& position) {
+void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vector3 velocity) {
 	//NULLポインタチェック
 	assert(model);
 
@@ -17,11 +17,17 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
+
+	//引数で受け取った速度をメンバ変数に代入
+	velocity_ = velocity;
+
 }
 
 void PlayerBullet::Update() { 
 	//ワールドトランスフォームの更新
 	worldTransform_.UpdateMatrix();
+	//座標を移動させる（1フレーム分の移動量を足しこむ）
+	worldTransform_.translation_ += velocity_;
 }
 
 void PlayerBullet::Draw(const Camera& camera) {
