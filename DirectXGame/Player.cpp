@@ -106,7 +106,7 @@ void Player::Rotate() {
 }
 
 void Player::Attack() {
-	if (input_->TriggerKey(DIK_SPACE)) {
+	if (input_->PushKey(DIK_SPACE)) {
 		// 弾があれば開放する
 		if (bullet_) {
 			delete bullet_;
