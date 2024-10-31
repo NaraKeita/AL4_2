@@ -14,6 +14,9 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 	//ワールドトランスフォームの初期化
 	//引数で受け取った初期座標をセット
 	worldTransform_.translation_ = position;
+
+	// ワールド変換の初期化
+	worldTransform_.Initialize();
 }
 
 void PlayerBullet::Update() { 

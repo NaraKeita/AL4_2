@@ -45,7 +45,6 @@ void Player::Update() {
 	worldTransform_.translation_.x += move.x;
 	worldTransform_.translation_.y += move.y;
 
-
 	ImGui::Begin("Debug1");
 	//flo
 	ImGui::InputFloat3("InputFloat3", &worldTransform_.translation_.x);
