@@ -4,6 +4,7 @@
 using namespace KamataEngine;
 #include "Player.h"
 #include "PlayerBullet.h"
+#include "Enemy.h"
 
 /// <summary>
 /// ゲームシーン
@@ -46,11 +47,14 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 	//弾
 	PlayerBullet* playerBullet_ = nullptr;
+	//敵
+	Enemy* enemy_ = nullptr;
 	// プレイヤーのモデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 	uint32_t bulletText_ = 0;
+	uint32_t enemyText_ = 0;
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	Camera viewProjection_;

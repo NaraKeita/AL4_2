@@ -28,6 +28,7 @@ void PlayerBullet::Update() {
 	worldTransform_.UpdateMatrix();
 	//座標を移動させる（1フレーム分の移動量を足しこむ）
 	worldTransform_.translation_ += velocity_;
+	worldTransform_.rotation_.z += 0.1f;
 }
 
 void PlayerBullet::Draw(const Camera& camera) {
