@@ -23,6 +23,8 @@ class EnemyBullet {
 
 	Vector3 velocity_;
 
+	
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -30,4 +32,5 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+	bool isDead_ = false;
 };

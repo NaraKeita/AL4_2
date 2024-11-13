@@ -1,6 +1,6 @@
 #include "GameScene.h"
 #include <cassert>
-
+#include <math.h>
 
 GameScene::GameScene() { 
 	
@@ -68,10 +68,21 @@ void GameScene::Update() {
 		viewProjection_.UpdateMatrix();
 	}
 
+	//Vector3 playerPosition = player_->GetPosition();
+	std::list<PlayerBullet*> playerBullets = player_->GetBullet();
+	for (PlayerBullet* playerBullet : playerBullets) {
+
+		Vector3 enemyPosition = enemy_->GetPosition();
+		Vector3 playerBulletPosition = playerBullet->GetPosition();
+		if (abs(playerBulletPosition.x - enemyPosition.x) < 3 && abs(playerBulletPosition.y - enemyPosition.y) < 3 && abs(playerBulletPosition.z - enemyPosition.z) < 3) {
+			playerBullet->OnCollision();
+			enemy_->OnCollision();
+		}
+	}
 }
 
 void GameScene::Draw() {
-
+	
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 

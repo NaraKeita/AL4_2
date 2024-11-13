@@ -19,8 +19,10 @@ public:
 	void MoveLeave();*/
 	//弾の発射に使う
 	void Fire();
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 	std::list<EnemyBullet*> bullets_;
-	
+	void OnCollision();
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -35,6 +37,8 @@ private:
 
 	// 弾
     EnemyBullet* bullet_ = nullptr;
+	//命
+	bool Life = true;
 
 	//フェーズ
 	Phase phase_ = Phase::Approach;

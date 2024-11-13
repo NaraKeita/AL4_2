@@ -33,7 +33,7 @@ void Enemy::Update() {
 	default:
 		//接近フェーズの更新関数
 		//移動（ベクトルを加算）
-		worldTransform_.translation_.z -= 0.1f;
+		//worldTransform_.translation_.z -= 0.1f;
 		//既定の位置に到達したら離脱
 		if (worldTransform_.translation_.z < 0.0f) {
 			phase_ = Phase::Leave;
@@ -49,20 +49,21 @@ void Enemy::Update() {
 	
 	}
 	// 弾更新
-	for (EnemyBullet* bullet : bullets_) {
+	/*for (EnemyBullet* bullet : bullets_) {
 		bullet->Update();
-	}
+	}*/
 }
 
 void Enemy::Draw(Camera& camera) {
 	// modelの描画
-	model_->Draw(worldTransform_, camera, textureHandle_);
-	// 描画
-	for (EnemyBullet* bullet : bullets_) {
-		bullet->Draw(camera);
+	if (Life == true) {
+		model_->Draw(worldTransform_, camera, textureHandle_);
 	}
+	
 }
 
 void Enemy::Fire() {
 	
 }
+
+void Enemy::OnCollision() { Life = false; }

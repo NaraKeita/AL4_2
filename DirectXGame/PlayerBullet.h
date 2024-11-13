@@ -1,5 +1,6 @@
 #pragma once
 #include <MathUtilityForText.h>
+#include "EnemyBullet.h"
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
@@ -24,6 +25,12 @@ public:
 
 	Vector3 velocity_;
 
+	void Hit();
+
+	Vector3 GetPosition() { return worldTransform_.translation_; }
+	bool IsDead() const { return isDead_; }
+	void OnCollision();
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -31,5 +38,7 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+	bool isDead_ = false; 
+	
 
 };

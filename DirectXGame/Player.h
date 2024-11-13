@@ -17,10 +17,14 @@ public:
 	void Draw(Camera& viewProjection);
 	void Rotate();
 	void Attack();
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 
 	std::list<PlayerBullet*> bullets_;
 
+	std::list<PlayerBullet*> GetBullet() { return bullets_; }
+
 private:
+
 	//ワールド変換データ
 	WorldTransform worldTransform_;
 	//モデル

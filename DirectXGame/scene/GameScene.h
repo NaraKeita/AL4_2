@@ -60,6 +60,9 @@ private: // メンバ変数
 	Camera viewProjection_;
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
+
+	// 弾
+	//PlayerBullet* bullet_ = nullptr;
 	
 
 	/// <summary>
