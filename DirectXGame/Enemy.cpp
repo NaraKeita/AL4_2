@@ -6,6 +6,8 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	textureHandle_ = textureHandle;
+
+	worldTransform_.translation_ = {2, 2, 20};
 	
 	// 引数で受け取った初期座標をセット
 	//worldTransform_.translation_ = pos;
@@ -19,6 +21,30 @@ void Enemy::Update() {
 	
 	worldTransform_.translation_.z -= 0.1f;
 	//worldTransform_.rotation_.x -= 0.1f;
+
+	//移動
+
+	switch (phase_) {
+	case Phase::Approach:
+	default:
+		//接近フェーズの更新関数
+		//移動（ベクトルを加算）
+		worldTransform_.translation_.z -= 0.1f;
+		//既定の位置に到達したら離脱
+		if (worldTransform_.translation_.z < 0.0f) {
+			phase_ = Phase::Leave;
+		}
+		break;
+	case Phase::Leave:
+		//離脱フェーズの更新関数
+		//移動
+		worldTransform_.translation_.x += 0.1f;
+		worldTransform_.translation_.y += 0.1f;
+
+		break;
+	
+	}
+
 }
 
 void Enemy::Draw(Camera& camera) {
