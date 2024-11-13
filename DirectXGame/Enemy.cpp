@@ -26,7 +26,7 @@ void Enemy::Update() {
 	worldTransform_.translation_.z -= 0.1f;
 	//worldTransform_.rotation_.x -= 0.1f;
 
-	//移動
+	//移動   
 
 	switch (phase_) {
 	case Phase::Approach:
