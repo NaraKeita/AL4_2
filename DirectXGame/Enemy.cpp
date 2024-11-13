@@ -1,4 +1,8 @@
 #include "Enemy.h"
+#include<cassert>
+#include"MathUtilityForText.h"
+
+Enemy::~Enemy() { delete bullet_; }
 
 void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	// NULLポインタをチェックする
@@ -44,10 +48,21 @@ void Enemy::Update() {
 		break;
 	
 	}
-
+	// 弾更新
+	for (EnemyBullet* bullet : bullets_) {
+		bullet->Update();
+	}
 }
 
 void Enemy::Draw(Camera& camera) {
 	// modelの描画
 	model_->Draw(worldTransform_, camera, textureHandle_);
+	// 描画
+	for (EnemyBullet* bullet : bullets_) {
+		bullet->Draw(camera);
+	}
+}
+
+void Enemy::Fire() {
+	
 }

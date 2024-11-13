@@ -1,10 +1,9 @@
 #pragma once
-#include <MathUtilityForText.h>
 #include <KamataEngine.h>
+#include <MathUtilityForText.h>
 using namespace KamataEngine;
 
-class PlayerBullet {
-public:
+class EnemyBullet {
 	/// 初期化
 	/// </summary>
 	/// <param name="model>モデル</param>
@@ -31,5 +30,4 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-
 };

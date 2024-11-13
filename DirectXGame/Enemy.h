@@ -1,4 +1,5 @@
 #pragma once
+#include "EnemyBullet.h"
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
@@ -10,11 +11,15 @@ enum class Phase {
 
 class Enemy {
 public:
+	~Enemy();
 	void Initialize(Model* model, uint32_t textureHandle);
 	void Update();
 	void Draw(Camera& viewProjection);
-	void MoveApproach();
-	void MoveLeave();
+	/*void MoveApproach();
+	void MoveLeave();*/
+	//弾の発射に使う
+	void Fire();
+	std::list<EnemyBullet*> bullets_;
 	
 private:
 	// ワールド変換データ
@@ -27,6 +32,9 @@ private:
 	Vector3 velocity_ = {0, 0, -0.1f};
 	
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
+
+	// 弾
+    EnemyBullet* bullet_ = nullptr;
 
 	//フェーズ
 	Phase phase_ = Phase::Approach;
