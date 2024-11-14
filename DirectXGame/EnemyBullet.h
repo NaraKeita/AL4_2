@@ -4,6 +4,7 @@
 using namespace KamataEngine;
 
 class EnemyBullet {
+public:
 	/// 初期化
 	/// </summary>
 	/// <param name="model>モデル</param>
