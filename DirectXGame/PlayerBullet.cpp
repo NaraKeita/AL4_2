@@ -34,6 +34,7 @@ void PlayerBullet::Draw(const Camera& camera) {
 	model_->Draw(worldTransform_, camera, textureHandle_);
 }
 
+
 void PlayerBullet::Hit() {
 
 }
