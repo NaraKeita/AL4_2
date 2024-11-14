@@ -71,5 +71,6 @@ void Enemy::Fire() {
 void Enemy::OnCollision(const Player* player) {
 	(void)player;
 	isDead_ = true;
+	finished_ = true;
 	Life = false;
 }

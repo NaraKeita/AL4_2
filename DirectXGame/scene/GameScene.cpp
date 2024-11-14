@@ -96,6 +96,10 @@ void GameScene::Update() {
 		deathParticles_->Update();
 	}
 
+	if (enemy_->IsFinished()) {
+		finished_ = true;
+	}
+
 }
 
 void GameScene::Draw() {

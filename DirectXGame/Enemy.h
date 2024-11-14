@@ -25,12 +25,18 @@ public:
 	std::list<EnemyBullet*> bullets_;
 	// 衝突応答
 	void OnCollision(const Player* player);
+
+	bool IsFinished() { return finished_; }
+
 	// デスフラグ
 	bool isDead_ = false;
 	// デスフラグのgetter
 	bool IsDead() const { return isDead_; }
 
 private:
+	// 終了フラグ
+	bool finished_ = false;
+
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	// モデル
