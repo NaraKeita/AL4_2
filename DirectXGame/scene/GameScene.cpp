@@ -56,9 +56,7 @@ void GameScene::Update() {
 	enemy_->Update();
 
 	if (enemy_->IsDead() == true) {
-		// 仮の生成処理。後で消す
-		deathParticles_ = new DeathParticles;
-		deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
+	
 	}
 
 
@@ -87,6 +85,9 @@ void GameScene::Update() {
 			player_->OnCollision(enemy_);
 			playerBullet->OnCollision();
 			enemy_->OnCollision(player_);
+			// 仮の生成処理。後で消す
+			deathParticles_ = new DeathParticles;
+			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
 		}
 	}
 
