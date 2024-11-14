@@ -4,6 +4,8 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
+class Enemy;
+
 class Player {
 public:
 	// キーボード入力
@@ -11,7 +13,7 @@ public:
 
 	~Player();
 
-	void Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* viewProjection*/);
+	void Initialize(Model* model, uint32_t textureHandle /*, ViewProjection* viewProjection*/, const Vector3& position);
 
 	void Update();
 	void Draw(Camera& viewProjection);
@@ -23,6 +25,8 @@ public:
 
 	std::list<PlayerBullet*> GetBullet() { return bullets_; }
 
+	void OnCollision(const Enemy* enemy);
+
 private:
 
 	//ワールド変換データ
@@ -31,6 +35,8 @@ private:
 	Model* model_ = nullptr;
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+
+	Vector3* position_ = nullptr;
 	// ImGuiで値を入力する変数
 	float inputFloat3[3] = {0, 0, 0};
 	// 弾

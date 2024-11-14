@@ -5,6 +5,7 @@ using namespace KamataEngine;
 #include "Player.h"
 #include "PlayerBullet.h"
 #include "Enemy.h"
+#include "DeathParticles.h"
 
 /// <summary>
 /// ゲームシーン
@@ -51,6 +52,7 @@ private: // メンバ変数
 	Enemy* enemy_ = nullptr;
 	// プレイヤーのモデル
 	Model* model_ = nullptr;
+
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 	uint32_t bulletText_ = 0;
@@ -61,9 +63,14 @@ private: // メンバ変数
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
 
+	// パーティクル
+	DeathParticles* deathParticles_ = nullptr;
+	Model* modelDeathParticle_ = nullptr;
+	
 	// 弾
 	//PlayerBullet* bullet_ = nullptr;
 	
+	std::list<DeathParticles*> deathPartiy_;
 
 	/// <summary>
 	/// ゲームシーン用

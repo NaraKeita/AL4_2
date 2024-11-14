@@ -3,6 +3,8 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
+class Player;
+
 //行動フェーズ
 enum class Phase { 
 	Approach,  //接近する
@@ -21,7 +23,12 @@ public:
 	void Fire();
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	std::list<EnemyBullet*> bullets_;
-	void OnCollision();
+	// 衝突応答
+	void OnCollision(const Player* player);
+	// デスフラグ
+	bool isDead_ = false;
+	// デスフラグのgetter
+	bool IsDead() const { return isDead_; }
 
 private:
 	// ワールド変換データ

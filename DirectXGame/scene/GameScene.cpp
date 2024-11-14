@@ -2,9 +2,7 @@
 #include <cassert>
 #include <math.h>
 
-GameScene::GameScene() { 
-	
-}
+GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	// 自キャラの開放
@@ -12,6 +10,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete debugCamera_;
 	delete enemy_;
+	delete modelDeathParticle_;
 }
 
 void GameScene::Initialize() {
@@ -23,23 +22,26 @@ void GameScene::Initialize() {
 	textureHandle_ = TextureManager::Load("mario.jpg");
 	bulletText_ = TextureManager::Load("black1x1.png");
 
-	//
+	//モデル
 	model_ = Model::Create();
-	//
+	//ワールドトランスフォーム
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 	// 自キャラの生成
 	player_ = new Player();
 	// 自キャラの初期化
-	player_->Initialize(model_, textureHandle_/*, &viewProjection_*/);
+
+	player_->Initialize(model_, textureHandle_ /*, &viewProjection_*/, worldTransform_.translation_);
 	//敵の生成
 	enemy_ = new Enemy();
 	//敵の初期化
 	enemy_->Initialize(model_, textureHandle_);
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;
-
+	
+		modelDeathParticle_ = Model::CreateFromOBJ("DeathParticle", true);
+	
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
 
@@ -52,6 +54,13 @@ void GameScene::Update() {
 	player_->Update();
 	debugCamera_->Update();
 	enemy_->Update();
+
+	if (enemy_->IsDead() == true) {
+		// 仮の生成処理。後で消す
+		deathParticles_ = new DeathParticles;
+		deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
+	}
+
 
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
@@ -75,10 +84,17 @@ void GameScene::Update() {
 		Vector3 enemyPosition = enemy_->GetPosition();
 		Vector3 playerBulletPosition = playerBullet->GetPosition();
 		if (abs(playerBulletPosition.x - enemyPosition.x) < 3 && abs(playerBulletPosition.y - enemyPosition.y) < 3 && abs(playerBulletPosition.z - enemyPosition.z) < 3) {
+			player_->OnCollision(enemy_);
 			playerBullet->OnCollision();
-			enemy_->OnCollision();
+			enemy_->OnCollision(player_);
 		}
 	}
+
+	//パーティクルの更新
+	if (deathParticles_) {
+		deathParticles_->Update();
+	}
+
 }
 
 void GameScene::Draw() {
@@ -112,6 +128,12 @@ void GameScene::Draw() {
 	player_->Draw(viewProjection_);
 	//敵の描画
 	enemy_->Draw(viewProjection_);
+
+	//パーティクルの描画
+	if (deathParticles_) {
+		deathParticles_->Draw();
+	}
+
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion

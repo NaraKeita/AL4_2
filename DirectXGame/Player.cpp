@@ -4,7 +4,7 @@
 
 Player::~Player() { delete bullet_; }
 
-void Player::Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* viewProjection*/) {
+void Player::Initialize(Model* model, uint32_t textureHandle /*, ViewProjection* viewProjection*/, const KamataEngine::Vector3& position) {
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
 	//NULLポインタをチェックする
@@ -12,6 +12,8 @@ void Player::Initialize(Model* model, uint32_t textureHandle/*, ViewProjection* 
 	//引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	textureHandle_ = textureHandle;
+	
+	worldTransform_.translation_ = position;
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	
@@ -100,7 +102,7 @@ void Player::Rotate() {
 	
 	
 	// 回転速さ[ラジアン/frame]
-	const float kRotSpeed = 0.02f;
+	const float kRotSpeed = 0.1f;
 
 	// 押した方向で移動ベクトルを変更
 	if (input_->PushKey(DIK_Q)) {
@@ -113,7 +115,7 @@ void Player::Rotate() {
 }
 
 void Player::Attack() {
-	if (input_->PushKey(DIK_SPACE)) {
+	if (input_->TriggerKey(DIK_SPACE)) {
 		// 弾があれば開放する
 		if (bullet_) {
 			delete bullet_;
@@ -132,4 +134,6 @@ void Player::Attack() {
 		bullets_.push_back(newBullet);
 	}
 }
+
+void Player::OnCollision(const Enemy* enemy) { (void)enemy; }
 
