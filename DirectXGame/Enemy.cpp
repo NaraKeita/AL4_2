@@ -2,7 +2,12 @@
 #include<cassert>
 #include"MathUtilityForText.h"
 
-Enemy::~Enemy() { delete bullet_; }
+Enemy::~Enemy() {
+	for (EnemyBullet* bullet : bullets_) {
+	    delete bullet;
+	}
+
+}
 
 void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	// NULLポインタをチェックする

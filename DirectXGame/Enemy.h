@@ -34,7 +34,7 @@ private:
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
 
 	// 弾
-    EnemyBullet* bullet_ = nullptr;
+   // EnemyBullet* bullet_ = nullptr;
 
 	//フェーズ
 	Phase phase_ = Phase::Approach;
