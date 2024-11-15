@@ -9,7 +9,7 @@ public:
 	/// </summary>
 	/// <param name="model>モデル</param>
 	/// <param name="textureHandle>テクスチャハンドル</param>
-	void Initialize(Model* model, const Vector3& pos, const Vector3 velocity);
+	void Initialize(Model* model, const Vector3& positon, const Vector3& velocity);
 
 	/// <summary>
 	/// 更新
@@ -24,7 +24,10 @@ public:
 
 	Vector3 velocity_;
 
-	
+	static const int32_t kLifeTime = 60 * 5;	
+	int32_t deathTimer_ = kLifeTime;	
+	bool isDead_ = false;
+	bool IsDead() const { return isDead_; }
 
 private:
 	// ワールド変換データ
@@ -33,5 +36,5 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-	bool isDead_ = false;
+	//bool isDead_ = false;
 };

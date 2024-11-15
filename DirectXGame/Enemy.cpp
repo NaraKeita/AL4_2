@@ -7,11 +7,18 @@ Enemy::~Enemy() { delete bullet_; }
 void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	// NULLポインタをチェックする
 	assert(model);
+	// シングルインスタンスを取得する
+	input_ = Input::GetInstance();
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	textureHandle_ = textureHandle;
 
 	worldTransform_.translation_ = {2, 2, 20};
+
+	// ワールド変換の初期化
+	worldTransform_.Initialize();
+	/*flag = 0;
+	timer = 0.0f;*/
 	
 	// 引数で受け取った初期座標をセット
 	//worldTransform_.translation_ = pos;

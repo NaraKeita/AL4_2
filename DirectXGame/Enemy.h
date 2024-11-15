@@ -33,6 +33,12 @@ public:
 	// デスフラグのgetter
 	bool IsDead() const { return isDead_; }
 
+	// キーボード入力	public:
+	Input* input_ = nullptr;
+	/*void Approach();
+	void Leave();
+	void Fire();*/
+
 private:
 	// 終了フラグ
 	bool finished_ = false;
