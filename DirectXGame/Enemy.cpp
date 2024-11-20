@@ -76,6 +76,8 @@ void Enemy::Draw(Camera& camera) {
 	
 }
 
+void Enemy::Approach() {}
+
 void Enemy::Fire() {
 	
 }
@@ -94,7 +96,7 @@ void Enemy::Attack() {
 		}
 		// 弾の速度
 		const float kBulletSpeed = 1.0f;
-		Vector3 velocity(0, 0, kBulletSpeed);
+		Vector3 velocity = {0, 0, kBulletSpeed};
 		// 弾を生成し、初期化
 		EnemyBullet* newBullet = new EnemyBullet();
 		newBullet->Initialize(model_, worldTransform_.translation_, velocity);
