@@ -20,7 +20,9 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	worldTransform_.translation_ = {2, 2, 20};
 	
 	// 引数で受け取った初期座標をセット
-	//worldTransform_.translation_ = pos;
+	
+
+
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 
@@ -96,7 +98,16 @@ void Enemy::Fire() {
 	//弾の速さ（調整項目）
 	const float kBulletSpeed = 0.5f;
 
-	//Vector3 player->worldTransform_.
+	// 自キャラのワールド座標を取得する
+	Vector3 targetPos = player_->GetWorldPosition();
+	// 敵キャラのワールド座標を取得する
+	Vector3 basePos = this->GetWorldPosition();
+	// 敵キャラ→自キャラの差分ベクトル
+	Vector3 velocity = targetPos - basePos;
+	// ベクトルの正規化
+	velocity = Normalize(velocity);
+	// ベクトルの長さを、早さに合わせる
+	velocity *= kBulletSpeed;
 
 	//弾を生成し、初期化
 	EnemyBullet* newBullet = new EnemyBullet();
