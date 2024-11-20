@@ -36,7 +36,7 @@ public:
 	// 衝突応答
 	//void OnCollision(const Player* player);
 
-	bool IsFinished() { return finished_; }
+	bool IsFinished() { return isFinished_; }
 
 	// デスフラグ
 	bool isDead_ = false;
@@ -48,7 +48,7 @@ public:
 
 private:
 	// 終了フラグ
-	bool finished_ = false;
+	bool isFinished_ = false;
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	// モデル

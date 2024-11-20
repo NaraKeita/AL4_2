@@ -111,6 +111,6 @@ void Enemy::Attack() {
 void Enemy::OnCollision(const Player* player) {
 	(void)player;
 	isDead_ = true;
-	finished_ = true;
+	isFinished_ = true;
 	Life = false;
 }

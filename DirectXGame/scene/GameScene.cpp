@@ -55,14 +55,6 @@ void GameScene::Update() {
 	debugCamera_->Update();
 	enemy_->Update();
 
-	if (enemy_->IsDead() == true) {
-	
-	}
-
-	if (player_->IsDead() == true) {
-	
-	}
-
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isDebugCameraActive_ = !isDebugCameraActive_;
@@ -78,14 +70,14 @@ void GameScene::Update() {
 		viewProjection_.UpdateMatrix();
 	}
 
-	//Vector3 playerPosition = player_->GetPosition();
+	
+	//自機の弾が敵に当たったとき
 	std::list<PlayerBullet*> playerBullets = player_->GetBullet();
 	for (PlayerBullet* playerBullet : playerBullets) {
-
 		Vector3 enemyPosition = enemy_->GetPosition();
 		Vector3 playerBulletPosition = playerBullet->GetPosition();
 		if (abs(playerBulletPosition.x - enemyPosition.x) < 3 && abs(playerBulletPosition.y - enemyPosition.y) < 3 && abs(playerBulletPosition.z - enemyPosition.z) < 3) {
-			player_->OnCollision(enemy_);
+			//player_->OnCollision(enemy_);
 			playerBullet->OnCollision();
 			enemy_->OnCollision(player_);
 			// 仮の生成処理。後で消す
@@ -94,13 +86,13 @@ void GameScene::Update() {
 		}
 	}
 
+	//敵の弾が自機に当たったとき
 	std::list<EnemyBullet*> enemyBullets = enemy_->GetBullet();
 	for (EnemyBullet* enemyBullet : enemyBullets) {
-
 		Vector3 playerPosition = player_->GetPosition();
 		Vector3 enemyBulletPosition = enemyBullet->GetPosition();
 		if (abs(enemyBulletPosition.x - playerPosition.x) < 3 && abs(enemyBulletPosition.y - playerPosition.y) < 3 && abs(enemyBulletPosition.z - playerPosition.z) < 3) {
-			enemy_->OnCollision(player_);
+			//enemy_->OnCollision(player_);
 			enemyBullet->OnCollision();
 			player_->OnCollision(enemy_);
 			// 仮の生成処理。後で消す
