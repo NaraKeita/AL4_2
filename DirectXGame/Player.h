@@ -22,13 +22,20 @@ public:
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 
 	std::list<PlayerBullet*> bullets_;
-
 	std::list<PlayerBullet*> GetBullet() { return bullets_; }
 
 	void OnCollision(const Enemy* enemy);
 
-private:
+	bool IsFinished() { return finished_; }
 
+	// デスフラグ
+	bool isDead_ = false;
+	// デスフラグのgetter
+	bool IsDead() const { return isDead_; }
+
+private:
+	// 終了フラグ
+	bool finished_ = false;
 	//ワールド変換データ
 	WorldTransform worldTransform_;
 	//モデル
@@ -41,5 +48,7 @@ private:
 	float inputFloat3[3] = {0, 0, 0};
 	// 弾
 	PlayerBullet* bullet_ = nullptr;
+	// 命
+	bool Life = true;
 	
 };

@@ -4,7 +4,7 @@
 
 Player::~Player() { delete bullet_; }
 
-void Player::Initialize(Model* model, uint32_t textureHandle /*, ViewProjection* viewProjection*/, const KamataEngine::Vector3& position) {
+void Player::Initialize(Model* model, uint32_t textureHandle, const KamataEngine::Vector3& position) {
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
 	//NULLポインタをチェックする
@@ -20,6 +20,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle /*, ViewProjection*
 }
 
 void Player::Update() {
+	worldTransform_.UpdateMatrix();
 
 	// 行列更新
 	worldTransform_.matWorld_ = MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
@@ -84,13 +85,13 @@ void Player::Update() {
 	for (PlayerBullet* bullet : bullets_) {
 		bullet->Update();
 	}
-
-	worldTransform_.UpdateMatrix();
-
 }
 
 void Player::Draw(Camera& camera) {
-	model_->Draw(worldTransform_, camera, textureHandle_);
+	if (Life == true) {
+		model_->Draw(worldTransform_, camera, textureHandle_);
+	}
+
 	// 弾更新
 	for (PlayerBullet* bullet : bullets_) {
 		bullet->Draw(camera);
@@ -135,5 +136,10 @@ void Player::Attack() {
 	}
 }
 
-void Player::OnCollision(const Enemy* enemy) { (void)enemy; }
+void Player::OnCollision(const Enemy* enemy) {
+	(void)enemy; 
+    isDead_ = true;
+	finished_ = true;
+	Life = false;
+}
 

@@ -24,6 +24,7 @@ public:
 	void Attack();
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	std::list<EnemyBullet*> bullets_;
+	std::list<EnemyBullet*> GetBullet() { return bullets_; }
 	// 発射間隔	// 衝突応答
 	static const int kFireInterval = 60;
 
@@ -44,14 +45,10 @@ public:
 
 	// キーボード入力	public:
 	Input* input_ = nullptr;
-	/*void Approach();
-	void Leave();
-	void Fire();*/
 
 private:
 	// 終了フラグ
 	bool finished_ = false;
-
 	// ワールド変換データ
 	WorldTransform worldTransform_;
 	// モデル

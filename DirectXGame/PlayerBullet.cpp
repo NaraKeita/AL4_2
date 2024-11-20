@@ -24,6 +24,7 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vecto
 void PlayerBullet::Update() { 
 	//ワールドトランスフォームの更新
 	worldTransform_.UpdateMatrix();
+
 	//座標を移動させる（1フレーム分の移動量を足しこむ）
 	worldTransform_.translation_ += velocity_;
 	worldTransform_.rotation_.z += 0.2f;

@@ -59,6 +59,9 @@ void GameScene::Update() {
 	
 	}
 
+	if (player_->IsDead() == true) {
+	
+	}
 
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
@@ -88,6 +91,21 @@ void GameScene::Update() {
 			// 仮の生成処理。後で消す
 			deathParticles_ = new DeathParticles;
 			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
+		}
+	}
+
+	std::list<EnemyBullet*> enemyBullets = enemy_->GetBullet();
+	for (EnemyBullet* enemyBullet : enemyBullets) {
+
+		Vector3 playerPosition = player_->GetPosition();
+		Vector3 enemyBulletPosition = enemyBullet->GetPosition();
+		if (abs(enemyBulletPosition.x - playerPosition.x) < 3 && abs(enemyBulletPosition.y - playerPosition.y) < 3 && abs(enemyBulletPosition.z - playerPosition.z) < 3) {
+			enemy_->OnCollision(player_);
+			enemyBullet->OnCollision();
+			player_->OnCollision(enemy_);
+			// 仮の生成処理。後で消す
+			/*deathParticles_ = new DeathParticles;
+			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);*/
 		}
 	}
 

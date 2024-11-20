@@ -24,10 +24,14 @@ public:
 
 	Vector3 velocity_;
 
+	void Hit();
+
 	static const int32_t kLifeTime = 60 * 5;	
 	int32_t deathTimer_ = kLifeTime;	
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 	bool isDead_ = false;
 	bool IsDead() const { return isDead_; }
+	void OnCollision();
 
 private:
 	// ワールド変換データ

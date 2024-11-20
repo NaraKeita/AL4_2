@@ -53,6 +53,8 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 	//弾
 	PlayerBullet* playerBullet_ = nullptr;
+	// 弾
+	EnemyBullet* enemyBullet_ = nullptr;
 	//敵
 	Enemy* enemy_ = nullptr;
 	// プレイヤーのモデル
