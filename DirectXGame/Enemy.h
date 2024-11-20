@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyBullet.h"
+#include "MathUtilityForText.h"
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
@@ -26,6 +27,8 @@ public:
 	//弾の発射に使う
 	void Fire();
 	void GetWorldPosition();
+	
+		
 	void Attack();
 
 	void SetPlayer(Player* player) { player_ = player; }
