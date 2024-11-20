@@ -34,7 +34,7 @@ public:
 	void OnCollision(const Player* player);
 
 	// 衝突応答
-	void OnCollision(const Player* player);
+	//void OnCollision(const Player* player);
 
 	bool IsFinished() { return finished_; }
 

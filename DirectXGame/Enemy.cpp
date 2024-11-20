@@ -17,8 +17,11 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
-	/*flag = 0;
-	timer = 0.0f;*/
+
+	flag = 0;
+	timer_ = 0.0f;
+	// 接近フェーズ初期化
+	Approach();
 	
 	// 引数で受け取った初期座標をセット
 	//worldTransform_.translation_ = pos;
@@ -55,6 +58,10 @@ void Enemy::Update() {
 		break;
 	
 	}
+
+	// キャラクター攻撃処理
+	Attack();
+
 	// 弾更新
 	/*for (EnemyBullet* bullet : bullets_) {
 		bullet->Update();
@@ -66,6 +73,10 @@ void Enemy::Draw(Camera& camera) {
 	if (Life == true) {
 		model_->Draw(worldTransform_, camera, textureHandle_);
 	}
+
+	for (EnemyBullet* bullet : bullets_) {
+		bullet->Draw(camera);
+	}
 	
 }
 
@@ -73,7 +84,30 @@ void Enemy::Fire() {
 	
 }
 
+void Enemy::Attack() {
+	timer_++;
+	if (timer_ >= 50.0f) {
+		flag = 1;
+	} else {
+		flag = 0;
+	}
+	if (flag == 1) {
+		if (bullet_) {
+			delete bullet_;
+			bullet_ = nullptr;
+		}
+		// 弾の速度
+		const float kBulletSpeed = 1.0f;
+		Vector3 velocity(0, 0, kBulletSpeed);
+		// 弾を生成し、初期化
+		EnemyBullet* newBullet = new EnemyBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_, velocity);
 
+		// 弾を登録する
+		bullets_.push_back(newBullet);
+		timer_ = 0.0f;
+	}
+}
 
 void Enemy::OnCollision(const Player* player) {
 	(void)player;
