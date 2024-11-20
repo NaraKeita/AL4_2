@@ -53,10 +53,15 @@ void Enemy::Update() {
 		break;
 	
 	}
+
+	// キャラクター攻撃処理
+	Attack();
+
 	// 弾更新
 	for (EnemyBullet* bullet : bullets_) {
 		bullet->Update();
 	}
+
 }
 
 void Enemy::Draw(Camera& camera) {
@@ -70,4 +75,25 @@ void Enemy::Draw(Camera& camera) {
 
 void Enemy::Fire() {
 	
+}
+
+void Enemy::Attack() {
+	//if (input_->TriggerKey(DIK_R)) {
+		// 弾があれば開放する
+		if (bullet_) {
+			delete bullet_;
+			bullet_ = nullptr;
+		}
+
+		// 弾の速度
+		const float kBulletSpeed = 1.0f;
+		Vector3 velocity(0, 0, kBulletSpeed);
+
+		// 弾を生成し、初期化
+		EnemyBullet* newBullet = new EnemyBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_, velocity);
+
+		// 弾を登録する
+		bullets_.push_back(newBullet);
+	//}
 }

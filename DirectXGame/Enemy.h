@@ -12,6 +12,8 @@ enum class Phase {
 class Enemy {
 public:
 	~Enemy();
+	// キーボード入力
+	Input* input_ = nullptr;
 	void Initialize(Model* model, uint32_t textureHandle);
 	void Update();
 	void Draw(Camera& viewProjection);
@@ -19,6 +21,7 @@ public:
 	void MoveLeave();*/
 	//弾の発射に使う
 	void Fire();
+	void Attack();
 	std::list<EnemyBullet*> bullets_;
 	
 private:
@@ -34,7 +37,7 @@ private:
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
 
 	// 弾
-   // EnemyBullet* bullet_ = nullptr;
+	EnemyBullet* bullet_ = nullptr;
 
 	//フェーズ
 	Phase phase_ = Phase::Approach;

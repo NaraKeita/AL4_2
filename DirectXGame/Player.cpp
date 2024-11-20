@@ -76,8 +76,6 @@ void Player::Update() {
 
 	worldTransform_.UpdateMatrix();
 
-	
-
 }
 
 void Player::Draw(Camera& camera) {
@@ -106,7 +104,7 @@ void Player::Rotate() {
 }
 
 void Player::Attack() {
-	if (input_->PushKey(DIK_SPACE)) {
+	if (input_->TriggerKey(DIK_SPACE)) {
 		// 弾があれば開放する
 		if (bullet_) {
 			delete bullet_;
