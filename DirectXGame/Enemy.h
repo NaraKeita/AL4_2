@@ -17,12 +17,22 @@ public:
 	void Initialize(Model* model, uint32_t textureHandle);
 	void Update();
 	void Draw(Camera& viewProjection);
+	void Approach();
 	/*void MoveApproach();
 	void MoveLeave();*/
 	//弾の発射に使う
 	void Fire();
+	void Attack();
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	std::list<EnemyBullet*> bullets_;
+	// 発射間隔	// 衝突応答
+	static const int kFireInterval = 60;
+
+	int flag;
+	float timer_;
+
+	void OnCollision(const Player* player);
+
 	// 衝突応答
 	void OnCollision(const Player* player);
 
@@ -58,8 +68,9 @@ private:
     EnemyBullet* bullet_ = nullptr;
 	//命
 	bool Life = true;
-
 	//フェーズ
 	Phase phase_ = Phase::Approach;
+	//発射タイマー
+	int32_t firingTimer_ = 0;
 	
 };
