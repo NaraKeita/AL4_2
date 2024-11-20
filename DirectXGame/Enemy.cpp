@@ -22,6 +22,13 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	//worldTransform_.translation_ = pos;
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
+
+	flag = 0;
+	timer = 0.0f;
+
+	//接近フェーズ初期化
+	Approach();
+
 }
 
 void Enemy::Update() {
@@ -73,13 +80,28 @@ void Enemy::Draw(Camera& camera) {
 	}
 }
 
-void Enemy::Fire() {
+void Enemy::Approach() {
+    //発射タイマーを初期化
+	firingTimer_ = kFireInterval;
+
+	//接近タイマーカウントダウン
+
+
+}
+
+void Enemy::Fire() { 
 	
 }
 
 void Enemy::Attack() {
-	//if (input_->TriggerKey(DIK_R)) {
-		// 弾があれば開放する
+	timer++;
+	if (timer >= 50.0f) {
+		flag = 1;
+	} else {
+		flag = 0;
+	}
+
+	if (flag == 1) {
 		if (bullet_) {
 			delete bullet_;
 			bullet_ = nullptr;
@@ -95,5 +117,7 @@ void Enemy::Attack() {
 
 		// 弾を登録する
 		bullets_.push_back(newBullet);
-	//}
+		timer = 0.0f;
+
+	}
 }

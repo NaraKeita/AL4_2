@@ -17,12 +17,18 @@ public:
 	void Initialize(Model* model, uint32_t textureHandle);
 	void Update();
 	void Draw(Camera& viewProjection);
+	void Approach();
 	/*void MoveApproach();
 	void MoveLeave();*/
 	//弾の発射に使う
 	void Fire();
 	void Attack();
 	std::list<EnemyBullet*> bullets_;
+	//発射間隔
+	static const int kFireInterval = 60;
+
+	int flag;
+	float timer;
 	
 private:
 	// ワールド変換データ
@@ -41,5 +47,8 @@ private:
 
 	//フェーズ
 	Phase phase_ = Phase::Approach;
+
+	//発射タイマー
+	int32_t firingTimer_ = 0;
 	
 };
