@@ -1,13 +1,15 @@
 #include "PlayerBullet.h"
 #include<cassert>
+#include "MathUtilityForText.h"
 
-void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vector3 velocity) {
+void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vector3& velocity) {
 	//NULLポインタチェック
 	assert(model);
 
 	model_ = model;
 	//テクスチャ読み込み
 	textureHandle_ = TextureManager::Load("black1x1.png");
+	worldTransform_.Initialize();
 
 	//ワールドトランスフォームの初期化
 	//引数で受け取った初期座標をセット
@@ -40,4 +42,15 @@ void PlayerBullet::Hit() {
 
 }
 
-void PlayerBullet::OnCollision() { isDead_ = true; }
+void PlayerBullet::OnCollision() { 
+	isDead_ = true;
+
+}
+
+Vector3 PlayerBullet::GetWorldPosition() {
+	Vector3 worldPos;
+	worldPos.x = worldTransform_.matWorld_.m[3][0];
+	worldPos.y = worldTransform_.matWorld_.m[3][1];
+	worldPos.z = worldTransform_.matWorld_.m[3][2];
+	return worldPos;
+}

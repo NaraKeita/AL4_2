@@ -10,10 +10,10 @@ class Player {
 public:
 	// キーボード入力
 	Input* input_ = nullptr;
-
+	//デストラクタ
 	~Player();
 
-	void Initialize(Model* model, uint32_t textureHandle /*, ViewProjection* viewProjection*/, const Vector3& position);
+	void Initialize(Model* model, uint32_t textureHandle, const Vector3& position);
 
 	void Update();
 	void Draw(Camera& viewProjection);
@@ -24,6 +24,7 @@ public:
 	std::list<PlayerBullet*> bullets_;
 	std::list<PlayerBullet*> GetBullet() { return bullets_; }
 
+	Vector3 GetWorldPosition();
 	void OnCollision(const Enemy* enemy);
 
 	bool IsFinished() { return finished_; }

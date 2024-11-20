@@ -3,7 +3,7 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
-class Player;
+class Player;//自機クラスの前方宣言
 
 //行動フェーズ
 enum class Phase { 
@@ -42,6 +42,11 @@ public:
 	bool isDead_ = false;
 	// デスフラグのgetter
 	bool IsDead() const { return isDead_; }
+
+	// 自キャラ
+	Player* player_ = nullptr;
+	void SetPlayer(Player* player) { player_ = player; }
+	Vector3 GetWorldPosition();
 
 	// キーボード入力	public:
 	Input* input_ = nullptr;

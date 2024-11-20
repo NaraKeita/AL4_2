@@ -10,7 +10,7 @@ public:
 	/// </summary>
 	/// <param name="model>モデル</param>
 	/// <param name="textureHandle>テクスチャハンドル</param>
-	void Initialize(Model* model, const Vector3& pos, const Vector3 velocity);
+	void Initialize(Model* model, const Vector3& pos, const Vector3& velocity);
 
 	/// <summary>
 	/// 更新
@@ -23,6 +23,7 @@ public:
 	/// <param name="camera>camera(参照渡し)</param>
 	void Draw(const Camera& camera);
 
+	Vector3 GetWorldPosition();
 	Vector3 velocity_;
 
 	void Hit();
@@ -30,6 +31,7 @@ public:
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	bool IsDead() const { return isDead_; }
 	void OnCollision();
+	bool isDead_ = false; 
 
 private:
 	// ワールド変換データ
@@ -38,7 +40,5 @@ private:
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-	bool isDead_ = false; 
 	
-
 };

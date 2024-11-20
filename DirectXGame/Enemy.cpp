@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include<cassert>
 #include"MathUtilityForText.h"
+#include "Player.h"
 
 Enemy::~Enemy() { delete bullet_; }
 
@@ -113,4 +114,9 @@ void Enemy::OnCollision(const Player* player) {
 	isDead_ = true;
 	isFinished_ = true;
 	Life = false;
+}
+
+Vector3 Enemy::GetWorldPosition() {
+	
+	return Vector3(); 
 }
