@@ -62,10 +62,6 @@ void Enemy::Update() {
 	// キャラクター攻撃処理
 	Attack();
 
-	// 弾更新
-	/*for (EnemyBullet* bullet : bullets_) {
-		bullet->Update();
-	}*/
 }
 
 void Enemy::Draw(Camera& camera) {

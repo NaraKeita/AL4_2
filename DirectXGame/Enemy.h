@@ -18,8 +18,7 @@ public:
 	void Update();
 	void Draw(Camera& viewProjection);
 	void Approach();
-	/*void MoveApproach();
-	void MoveLeave();*/
+	
 	//弾の発射に使う
 	void Fire();
 	void Attack();
