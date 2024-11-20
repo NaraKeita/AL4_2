@@ -5,6 +5,8 @@
 Enemy::~Enemy() { delete bullet_; }
 
 void Enemy::Initialize(Model* model, uint32_t textureHandle) {
+	// ワールド変換の初期化
+	worldTransform_.Initialize();
 	// NULLポインタをチェックする
 	assert(model);
 	// シングルインスタンスを取得する
@@ -25,8 +27,7 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	
 	// 引数で受け取った初期座標をセット
 	//worldTransform_.translation_ = pos;
-	// ワールド変換の初期化
-	worldTransform_.Initialize();
+	
 }
 
 void Enemy::Update() {
@@ -61,6 +62,11 @@ void Enemy::Update() {
 
 	// キャラクター攻撃処理
 	Attack();
+
+	// 弾更新
+	for (EnemyBullet* bullet : bullets_) {
+		bullet->Update();
+	}
 
 }
 
