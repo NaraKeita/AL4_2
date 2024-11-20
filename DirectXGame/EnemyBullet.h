@@ -32,6 +32,7 @@ public:
 	bool isDead_ = false;
 	bool IsDead() const { return isDead_; }
 	void OnCollision();
+	Vector3 GetWorldPosition();
 
 private:
 	// ワールド変換データ
