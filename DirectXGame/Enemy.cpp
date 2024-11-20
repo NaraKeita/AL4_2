@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include<cassert>
 #include"MathUtilityForText.h"
+#include "Player.h"
 
 Enemy::~Enemy() {
 	for (EnemyBullet* bullet : bullets_) {
@@ -90,7 +91,20 @@ void Enemy::Approach() {
 }
 
 void Enemy::Fire() { 
-	
+	assert(player_);
+
+	//弾の速さ（調整項目）
+	const float kBulletSpeed = 0.5f;
+
+	//Vector3 player->worldTransform_.
+
+	//弾を生成し、初期化
+	EnemyBullet* newBullet = new EnemyBullet();
+	newBullet->Initialize(model_, worldTransform_.translation_, velocity_);
+
+	//弾を登録する
+	bullets_.push_back(newBullet);
+
 }
 
 void Enemy::Attack() {

@@ -3,6 +3,9 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
+//自機クラスの前方宣言
+class Player;
+
 //行動フェーズ
 enum class Phase { 
 	Approach,  //接近する
@@ -23,13 +26,16 @@ public:
 	//弾の発射に使う
 	void Fire();
 	void Attack();
+
+	void SetPlayer(Player* player) { player_ = player; }
+
 	std::list<EnemyBullet*> bullets_;
 	//発射間隔
 	static const int kFireInterval = 60;
 
 	int flag;
 	float timer;
-	
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -44,11 +50,11 @@ private:
 
 	// 弾
 	EnemyBullet* bullet_ = nullptr;
-
 	//フェーズ
 	Phase phase_ = Phase::Approach;
-
 	//発射タイマー
 	int32_t firingTimer_ = 0;
+	// 自キャラ
+	Player* player_ = nullptr;
 	
 };

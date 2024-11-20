@@ -18,6 +18,9 @@ public:
 	void Rotate();
 	void Attack();
 
+	//ワールド座標を取得
+	Vector3 GetWorldPosition();
+
 	std::list<PlayerBullet*> bullets_;
 
 private:
