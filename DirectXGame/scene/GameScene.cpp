@@ -39,6 +39,9 @@ void GameScene::Initialize() {
 	enemy_->Initialize(model_, textureHandle_);
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;
+
+	//敵キャラに自キャラのアドレスを渡す
+	enemy_->SetPlayer(player_);
 	
 		modelDeathParticle_ = Model::CreateFromOBJ("DeathParticle", true);
 	

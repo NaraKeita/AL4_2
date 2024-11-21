@@ -24,9 +24,6 @@ public:
 	void Fire();
 	void Attack();
 
-	void GetWorldPosition();
-	void SetPlayer(Player* player) { player_ = player; }
-
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	std::list<EnemyBullet*> bullets_;
 	std::list<EnemyBullet*> GetBullet() { return bullets_; }
@@ -66,8 +63,6 @@ private:
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 
-	Vector3 velocity_ = {0, 0, -0.1f};
-	
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
 
 	// 弾

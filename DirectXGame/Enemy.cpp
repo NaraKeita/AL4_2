@@ -11,7 +11,7 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	// NULLポインタをチェックする
 	assert(model);
 	// シングルインスタンスを取得する
-	input_ = Input::GetInstance();
+	//input_ = Input::GetInstance();
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	textureHandle_ = textureHandle;
@@ -78,10 +78,33 @@ void Enemy::Draw(Camera& camera) {
 	}
 }
 
-void Enemy::Approach() {}
+void Enemy::Approach() {
+    //発射タイマーを初期化	
+    firingTimer_ = kFireInterval;
+}
 
 void Enemy::Fire() {
-	
+	assert(player_);
+	// 弾の速さ（調整項目）
+	const float kBulletSpeed = 0.5f;
+	// 自キャラのワールド座標を取得する
+	Vector3 targetPos = player_->GetWorldPosition();
+	// 敵キャラのワールド座標を取得する
+	Vector3 basePos = this->GetWorldPosition();
+	// 敵キャラ→自キャラの差分ベクトル
+	Vector3 velocity = targetPos - basePos;
+	// ベクトルの正規化
+	velocity = Normalize(velocity);
+	// ベクトルの長さを、早さに合わせる
+
+	velocity *= kBulletSpeed;
+
+	// 弾を生成し、初期化
+	EnemyBullet* newBullet = new EnemyBullet();
+	newBullet->Initialize(model_, worldTransform_.translation_, velocity);
+	// 弾を登録する
+	bullets_.push_back(newBullet);
+
 }
 
 void Enemy::Attack() {
@@ -97,14 +120,14 @@ void Enemy::Attack() {
 			bullet_ = nullptr;
 		}
 		// 弾の速度
-		const float kBulletSpeed = 1.0f;
-		Vector3 velocity = {0, 0, kBulletSpeed};
+	//	const float kBulletSpeed = 1.0f;
+	//	Vector3 velocity = {0, 0, kBulletSpeed};
 		// 弾を生成し、初期化
-		EnemyBullet* newBullet = new EnemyBullet();
-		newBullet->Initialize(model_, worldTransform_.translation_, velocity);
-
+		/*EnemyBullet* newBullet = new EnemyBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_, velocity);*/
+		Fire();
 		// 弾を登録する
-		bullets_.push_back(newBullet);
+		//bullets_.push_back(newBullet);
 		timer_ = 0.0f;
 	}
 }
