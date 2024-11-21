@@ -121,7 +121,6 @@ void GameScene::Update() {
 	if (player_->IsFinished()) {
 		PlayerFinished_ = true;
 	}
-
 }
 
 void GameScene::Draw() {
