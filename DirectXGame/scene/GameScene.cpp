@@ -58,6 +58,11 @@ void GameScene::Update() {
 	debugCamera_->Update();
 	enemy_->Update();
 
+	if (enemy_->IsDead() == true) {
+	}
+	if (player_->IsDead() == true) {
+	}
+
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isDebugCameraActive_ = !isDebugCameraActive_;
@@ -110,7 +115,11 @@ void GameScene::Update() {
 	}
 
 	if (enemy_->IsFinished()) {
-		finished_ = true;
+		EnemyFinished_ = true;
+	}
+
+	if (player_->IsFinished()) {
+		PlayerFinished_ = true;
 	}
 
 }

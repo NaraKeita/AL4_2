@@ -2,14 +2,16 @@
 using namespace KamataEngine;
 #include "scene/GameScene.h"
 #include "TitleScene.h"
-// #include"ClearScene.h"
+#include"ClearScene.h"
+#include"DeadScene.h"
 
 // シーン（型）
 enum class Scene {
 	kUnknown = 0,
 	kTitle,
 	kGame,
-	// kClear,
+	kClear,
+	kDead,
 };
 
 // 現在シーン（型）
@@ -21,7 +23,8 @@ void DrawScene();
 
 GameScene* gameScene = nullptr;
 TitleScene* titleScene = nullptr;
-// ClearScene* clearScene = nullptr;
+ClearScene* clearScene = nullptr;
+DeadScene* deadScene = nullptr;
 
 
 //2_1_確認課題
@@ -37,7 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow(L"LE2D_13_ナラ_ケイタ_AL4_");
+	win->CreateGameWindow(L"TD2回目");
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
@@ -115,7 +118,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 各種解放
 	delete gameScene;
 	delete titleScene;
-	//delete clearScene;
+	delete clearScene;
+	delete deadScene;
 	// 3Dモデル解放
 	Model::StaticFinalize();
 	audio->Finalize();
@@ -145,30 +149,50 @@ void ChangeScene() {
 		}
 		break;
 	case Scene::kGame:
-		if (gameScene->IsFinished()) {
+		if (gameScene->EnemyIsFinished()) {
 			// シーン変更
-			scene = Scene::kTitle;
+			scene = Scene::kClear;
 			// 旧シーンの開放
 			delete gameScene;
 			gameScene = nullptr;
+			// 新シーンの生成と初期化
+			clearScene = new ClearScene;
+			clearScene->Initialize();
+		} else if (gameScene->PlayerIsFinished()) {
+			// シーン変更
+			scene = Scene::kDead;
+			// 旧シーンの開放
+			delete gameScene;
+			gameScene = nullptr;
+			// 新シーンの生成と初期化
+			deadScene = new DeadScene;
+			deadScene->Initialize();
+		}
+
+		break;
+	case Scene::kClear:
+		if (clearScene->IsFinished()) {
+			// シーン変更
+			scene = Scene::kTitle;
+			// 旧シーンの開放
+			delete clearScene;
+			clearScene = nullptr;
 			// 新シーンの生成と初期化
 			titleScene = new TitleScene;
 			titleScene->Initialize();
 		}
 		break;
-		// case Scene::kClear:
-		//	if (clearScene->IsFinished()) {
-		//		// シーン変更
-		//		scene = Scene::kTitle;
-		//		// 旧シーンの開放
-		//		delete clearScene;
-		//		clearScene = nullptr;
-		//		// 新シーンの生成と初期化
-		//		titleScene = new TitleScene;
-		//		titleScene->Initialize();
-		//	}
-
-		//	break;
+	case Scene::kDead:
+		if (deadScene->IsFinished()) {
+			// シーン変更
+			scene = Scene::kTitle;
+			// 旧シーンの開放
+			delete deadScene;
+			deadScene = nullptr;
+			// 新シーンの生成と初期化
+			titleScene = new TitleScene;
+			titleScene->Initialize();
+		}
 	}
 }
 
@@ -181,9 +205,12 @@ void UpdateScene() {
 	case Scene::kGame:
 		gameScene->Update();
 		break;
-		/*case Scene::kClear:
-		    clearScene->Update();
-		    break;*/
+	case Scene::kClear:
+		clearScene->Update();
+		break;
+	case Scene::kDead:
+		deadScene->Update();
+		break;
 	}
 }
 
@@ -196,8 +223,11 @@ void DrawScene() {
 	case Scene::kGame:
 		gameScene->Draw();
 		break;
-		/*case Scene::kClear:
-		    clearScene->Draw();
-		    break;*/
+	case Scene::kClear:
+		 clearScene->Draw();
+		 break;
+	case Scene::kDead:
+		deadScene->Draw();
+		break;
 	}
 }

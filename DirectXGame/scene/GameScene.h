@@ -40,11 +40,14 @@ public: // メンバ関数
 	bool isDebugCameraActive_ = false;
 
 	// デスフラグのgetter
-	bool IsFinished() const { return finished_; }
+	bool PlayerIsFinished() const { return PlayerFinished_; }
+	bool EnemyIsFinished() const { return EnemyFinished_; }
 
 private: // メンバ変数
 	// 終了フラグ
-	bool finished_ = false;
+	bool PlayerFinished_ = false;
+	
+	bool EnemyFinished_ = false;
 
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;

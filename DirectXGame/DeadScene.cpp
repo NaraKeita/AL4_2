@@ -1,11 +1,12 @@
-#include "ClearScene.h"
-#include <numbers>
+#include "DeadScene.h"
 
-ClearScene::ClearScene() {}
+DeadScene::DeadScene() {}
 
-ClearScene::~ClearScene() { delete modelFont_; }
+DeadScene::~DeadScene() {
+	delete modelFont_;
+}
 
-void ClearScene::Initialize() {
+void DeadScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
@@ -13,7 +14,7 @@ void ClearScene::Initialize() {
 	// ビュープロジェクション
 	camera_.Initialize();
 
-	modelFont_ = Model::CreateFromOBJ("clearFont");
+	modelFont_ = Model::CreateFromOBJ("deadFont");
 
 	worldTransformFont_.Initialize();
 
@@ -21,14 +22,14 @@ void ClearScene::Initialize() {
 	worldTransformFont_.scale_ = {2, 2, 2};
 
 	//// サウンドデータの読み込み
-	//soundDataHandle_ = audio_->LoadWave("Clear.wav");
+	// soundDataHandle_ = audio_->LoadWave("Clear.wav");
 	//// 音声再生
-	//audio_->PauseWave(soundDataHandle_);
+	// audio_->PauseWave(soundDataHandle_);
 	//// 第2引数でループ再生を指定
-	//voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+	// voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
-void ClearScene::Update() {
+void DeadScene::Update() {
 	if (Input::GetInstance()->ReleseKey(DIK_SPACE)) {
 		// 音声停止
 		/*audio_->StopWave(voiceHandle_);*/
@@ -41,7 +42,7 @@ void ClearScene::Update() {
 	worldTransformFont_.UpdateMatrix();
 }
 
-void ClearScene::Draw() {
+void DeadScene::Draw() {
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
