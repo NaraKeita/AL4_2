@@ -146,8 +146,8 @@ Vector3 Player::GetWorldPosition() {
 
 void Player::OnCollision(const Enemy* enemy) {
 	(void)enemy; 
-    isDead_ = true;
+  /*  isDead_ = true;
 	finished_ = true;
-	Life = false;
+	Life = false;*/
 }
 

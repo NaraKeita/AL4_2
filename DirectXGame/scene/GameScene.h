@@ -28,6 +28,8 @@ public: // メンバ関数
 	/// </summary>
 	void Initialize();
 
+	int HP;
+
 	/// <summary>
 	/// 毎フレーム処理
 	/// </summary>
@@ -56,10 +58,46 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 	//弾
 	PlayerBullet* playerBullet_ = nullptr;
+	
+	// UI
+	uint32_t playerLifeTexture3_ = 0;
+	uint32_t playerLifeTexture2_ = 0;
+	uint32_t playerLifeTexture1_ = 0;
+	uint32_t playerLifeTexture0_ = 0;
+	Sprite* sprite3_ = nullptr;
+	Sprite* sprite2_ = nullptr;
+	Sprite* sprite1_ = nullptr;
+	Sprite* sprite0_ = nullptr;
+
+	
+
+
+
 	// 弾
 	EnemyBullet* enemyBullet_ = nullptr;
 	//敵
 	Enemy* enemy_ = nullptr;
+
+	// UI
+	uint32_t enemyLifeTexture7_ = 0;
+	uint32_t enemyLifeTexture6_ = 0;
+	uint32_t enemyLifeTexture5_ = 0;
+	uint32_t enemyLifeTexture4_ = 0;
+	uint32_t enemyLifeTexture3_ = 0;
+	uint32_t enemyLifeTexture2_ = 0;
+	uint32_t enemyLifeTexture1_ = 0;
+	uint32_t enemyLifeTexture0_ = 0;
+	Sprite* enemySprite7_ = nullptr;
+	Sprite* enemySprite6_ = nullptr;
+	Sprite* enemySprite5_ = nullptr;
+	Sprite* enemySprite4_ = nullptr;
+	Sprite* enemySprite3_ = nullptr;
+	Sprite* enemySprite2_ = nullptr;
+	Sprite* enemySprite1_ = nullptr;
+	Sprite* enemySprite0_ = nullptr;
+
+	int enemyHP = 7;
+
 	// プレイヤーのモデル
 	Model* model_ = nullptr;
 

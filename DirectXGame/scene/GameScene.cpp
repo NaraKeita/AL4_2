@@ -1,6 +1,12 @@
 #include "GameScene.h"
 #include <cassert>
 #include <math.h>
+#include "Player.h"
+#include "Enemy.h"
+#include "EnemyBullet.h"
+
+#include <KamataEngine.h>	
+using namespace KamataEngine;
 
 GameScene::GameScene() {}
 
@@ -12,6 +18,8 @@ GameScene::~GameScene() {
 	delete enemy_;
 	delete modelDeathParticle_;
 }
+
+
 
 void GameScene::Initialize() {
 
@@ -35,6 +43,9 @@ void GameScene::Initialize() {
 	// 自キャラの初期化
 
 	player_->Initialize(model_ /*, &viewProjection_*/, worldTransform_.translation_);
+
+	GameScene::HP = 3;
+
 	//敵の生成
 	enemy_ = new Enemy();
 	//敵の初期化
@@ -46,6 +57,42 @@ void GameScene::Initialize() {
 	enemy_->SetPlayer(player_);
 	
 	modelDeathParticle_ = Model::CreateFromOBJ("DeathParticle", true);
+
+	playerLifeTexture3_ = TextureManager::Load("playerLife/3.png");
+	sprite3_ = Sprite::Create(playerLifeTexture3_, {0, 0});
+
+	playerLifeTexture2_ = TextureManager::Load("playerLife/2.png");
+	sprite2_ = Sprite::Create(playerLifeTexture2_, {0, 0});
+
+	playerLifeTexture1_ = TextureManager::Load("playerLife/1.png");
+	sprite1_ = Sprite::Create(playerLifeTexture1_, {0, 0});
+
+	playerLifeTexture0_ = TextureManager::Load("playerLife/0.png");
+	sprite0_ = Sprite::Create(playerLifeTexture0_, {0, 0});
+
+	enemyLifeTexture7_ = TextureManager::Load("bossLife/7.png");
+	enemySprite7_ = Sprite::Create(enemyLifeTexture7_, {0, 0});
+
+	enemyLifeTexture6_ = TextureManager::Load("bossLife/6.png");
+	enemySprite6_ = Sprite::Create(enemyLifeTexture6_, {0, 0});
+
+	enemyLifeTexture5_ = TextureManager::Load("bossLife/5.png");
+	enemySprite5_ = Sprite::Create(enemyLifeTexture5_, {0, 0});
+
+	enemyLifeTexture4_ = TextureManager::Load("bossLife/4.png");
+	enemySprite4_ = Sprite::Create(enemyLifeTexture4_, {0, 0});
+
+	enemyLifeTexture3_ = TextureManager::Load("bossLife/3.png");
+	enemySprite3_ = Sprite::Create(enemyLifeTexture3_, {0, 0});
+
+	enemyLifeTexture2_ = TextureManager::Load("bossLife/2.png");
+	enemySprite2_ = Sprite::Create(enemyLifeTexture2_, {0, 0});
+
+	enemyLifeTexture1_ = TextureManager::Load("bossLife/1.png");
+	enemySprite1_ = Sprite::Create(enemyLifeTexture1_, {0, 0});
+
+	enemyLifeTexture0_ = TextureManager::Load("bossLife/0.png");
+	enemySprite0_ = Sprite::Create(enemyLifeTexture0_, {0, 0});
 	
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
@@ -93,6 +140,7 @@ void GameScene::Update() {
 			// 仮の生成処理。後で消す
 			deathParticles_ = new DeathParticles;
 			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
+			enemyHP -= 1;
 		}
 	}
 
@@ -105,10 +153,12 @@ void GameScene::Update() {
 			//enemy_->OnCollision(player_);
 			enemyBullet->OnCollision();
 			player_->OnCollision(enemy_);
+			HP -= 1;
 			// 仮の生成処理。後で消す
 			/*deathParticles_ = new DeathParticles;
 			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);*/
 		}
+		
 	}
 
 	//パーティクルの更新
@@ -160,6 +210,57 @@ void GameScene::Draw() {
 	//パーティクルの描画
 	if (deathParticles_) {
 		deathParticles_->Draw();
+	}
+
+	// 前景スプライト描画前処理
+	Sprite::PreDraw(commandList);
+
+	if (HP == 3) {
+		sprite3_->Draw();
+	}
+
+	if (HP == 2) {
+		sprite2_->Draw();
+	}
+
+	if (HP == 1) {
+		sprite1_->Draw();
+	}
+
+	if (HP <= 0) {
+		sprite0_->Draw();
+	}
+
+	if (enemyHP == 7) {
+		enemySprite7_->Draw();
+	}
+
+	if (enemyHP == 6) {
+		enemySprite6_->Draw();
+	}
+
+	if (enemyHP == 5) {
+		enemySprite5_->Draw();
+	}
+
+	if (enemyHP == 4) {
+		enemySprite4_->Draw();
+	}
+
+	if (enemyHP == 3) {
+		enemySprite3_->Draw();
+	}
+
+	if (enemyHP == 2) {
+		enemySprite2_->Draw();
+	}
+
+	if (enemyHP == 1) {
+		enemySprite1_->Draw();
+	}
+
+	if (enemyHP <= 0) {
+		enemySprite0_->Draw();
 	}
 
 	// 3Dオブジェクト描画後処理

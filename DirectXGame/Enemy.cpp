@@ -34,8 +34,17 @@ void Enemy::Update() {
 	//worldTransform_.translation_.z -= 0.1f;
 	//worldTransform_.rotation_.x -= 0.1f;
 	model_ = Model::CreateFromOBJ("enemy");
-	//移動   
 
+	// デスフラグのたった弾を削除
+	bullets_.remove_if([](EnemyBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
+
+	//移動   
 	switch (phase_) {
 	case Phase::Approach:
 	default:
@@ -134,9 +143,9 @@ void Enemy::Attack() {
 
 void Enemy::OnCollision(const Player* player) {
 	(void)player;
-	isDead_ = true;
+	/*isDead_ = true;
 	isFinished_ = true;
-	Life = false;
+	Life = false;*/
 }
 
 Vector3 Enemy::GetWorldPosition() {

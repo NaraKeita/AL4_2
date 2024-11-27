@@ -59,6 +59,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	audio = Audio::GetInstance();
 	audio->Initialize();
 
+	
+
 	// テクスチャマネージャの初期化
 	TextureManager::GetInstance()->Initialize(dxCommon->GetDevice());
 	TextureManager::Load("white1x1.png");
@@ -158,7 +160,7 @@ void ChangeScene() {
 			// 新シーンの生成と初期化
 			clearScene = new ClearScene;
 			clearScene->Initialize();
-		} else if (gameScene->PlayerIsFinished()) {
+		} else if (gameScene->HP <= 0) {
 			// シーン変更
 			scene = Scene::kDead;
 			// 旧シーンの開放
