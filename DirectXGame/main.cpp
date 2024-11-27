@@ -4,11 +4,14 @@ using namespace KamataEngine;
 #include "TitleScene.h"
 #include"ClearScene.h"
 #include"DeadScene.h"
+#include"MobScene.h"
+
 
 // シーン（型）
 enum class Scene {
 	kUnknown = 0,
 	kTitle,
+	kMobGame,
 	kGame,
 	kClear,
 	kDead,
@@ -25,7 +28,7 @@ GameScene* gameScene = nullptr;
 TitleScene* titleScene = nullptr;
 ClearScene* clearScene = nullptr;
 DeadScene* deadScene = nullptr;
-
+MobScene* mobScene = nullptr;
 
 //2_1_確認課題
 // Windowsアプリでのエントリーポイント(main関数)
@@ -122,6 +125,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete titleScene;
 	delete clearScene;
 	delete deadScene;
+	delete mobScene;
+
 	// 3Dモデル解放
 	Model::StaticFinalize();
 	audio->Finalize();
@@ -134,24 +139,48 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	return 0;
 }
 
-// シーン切り替え
-void ChangeScene() {
+    // シーン切り替え
+    // シーン切り替え
+    void
+    ChangeScene() {
 
 	switch (scene) {
 	case Scene::kTitle:
 		if (titleScene->IsFinished()) {
 			// シーン変更
-			scene = Scene::kGame;
+			scene = Scene::kMobGame;
 			// 旧シーンの開放
 			delete titleScene;
 			titleScene = nullptr;
 			// 新シーンの生成と初期化
-			gameScene = new GameScene;
-			gameScene->Initialize();
+			mobScene = new MobScene;
+			mobScene->Initialize();
 		}
 		break;
+	case Scene::kMobGame:
+		if (mobScene->EnemyIsFinished()) {
+			// シーン変更
+			scene = Scene::kGame;
+			// 旧シーンの開放
+			delete mobScene;
+			mobScene = nullptr;
+			// 新シーンの生成と初期化
+			gameScene = new GameScene;
+			gameScene->Initialize();
+		} else if (mobScene->HP <= 0) {
+			// シーン変更
+			scene = Scene::kDead;
+			// 旧シーンの開放
+			delete mobScene;
+			mobScene = nullptr;
+			// 新シーンの生成と初期化
+			deadScene = new DeadScene;
+			deadScene->Initialize();
+		}
+
+		break;
 	case Scene::kGame:
-		if (gameScene->EnemyIsFinished()) {
+		if (gameScene->enemyHP <= 0) {
 			// シーン変更
 			scene = Scene::kClear;
 			// 旧シーンの開放
@@ -204,6 +233,9 @@ void UpdateScene() {
 	case Scene::kTitle:
 		titleScene->Update();
 		break;
+	case Scene::kMobGame:
+		mobScene->Update();
+		break;
 	case Scene::kGame:
 		gameScene->Update();
 		break;
@@ -220,14 +252,17 @@ void UpdateScene() {
 void DrawScene() {
 	switch (scene) {
 	case Scene::kTitle:
-		 titleScene->Draw();
+		titleScene->Draw();
+		break;
+	case Scene::kMobGame:
+		mobScene->Draw();
 		break;
 	case Scene::kGame:
 		gameScene->Draw();
 		break;
 	case Scene::kClear:
-		 clearScene->Draw();
-		 break;
+		clearScene->Draw();
+		break;
 	case Scene::kDead:
 		deadScene->Draw();
 		break;

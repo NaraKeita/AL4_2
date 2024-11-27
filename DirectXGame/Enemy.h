@@ -61,6 +61,8 @@ private:
 	//uint32_t textureHandle_ = 0u;
 	//Model* enemyText_ = nullptr;
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
+	float LeftRightSpeed = 0.3f;
+	float UpDownSpeed = 0.3f;
 
 	// 弾
     EnemyBullet* bullet_ = nullptr;

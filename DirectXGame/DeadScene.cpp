@@ -4,6 +4,7 @@ DeadScene::DeadScene() {}
 
 DeadScene::~DeadScene() {
 	delete modelFont_;
+	delete modelPlayer_;
 }
 
 void DeadScene::Initialize() {
@@ -15,8 +16,10 @@ void DeadScene::Initialize() {
 	camera_.Initialize();
 
 	modelFont_ = Model::CreateFromOBJ("deadFont");
+	//modelPlayer_ = Model::CreateFromOBJ("playerOver");
 
 	worldTransformFont_.Initialize();
+	worldTransform_.Initialize();
 
 	worldTransformFont_.translation_.y = 10;
 	worldTransformFont_.scale_ = {2, 2, 2};
@@ -38,6 +41,8 @@ void DeadScene::Update() {
 	// タイマーを加算
 	timer_ += 1.0f / 60.0f;
 
+	worldTransform_.rotation_.z += 0.2f;
+
 	// 行列を更新
 	worldTransformFont_.UpdateMatrix();
 }
@@ -51,6 +56,7 @@ void DeadScene::Draw() {
 
 	// ここに3Dオブジェクトの描画処理を追加できる
 	modelFont_->Draw(worldTransformFont_, camera_);
+	//modelPlayer_->Draw(worldTransform_, camera_);
 
 	// 3Dオブジェクト描画処理後
 	Model::PostDraw();

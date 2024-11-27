@@ -30,7 +30,7 @@ void Player::Update() {
 	//キャラクターの移動ベクトル
 	Vector3 move = {0, 0, 0};
 	//キャラクターの移動速さ
-	const float kCharacterSpeed = 1.5f;
+	const float kCharacterSpeed = 0.7f;
 
 	// デスフラグのたった弾を削除
 	bullets_.remove_if([](PlayerBullet* bullet) {
@@ -149,5 +149,12 @@ void Player::OnCollision(const Enemy* enemy) {
   /*  isDead_ = true;
 	finished_ = true;
 	Life = false;*/
+}
+
+void Player::OnCollision(const MobEnemy* mobEnemy) {
+	(void)mobEnemy; 
+	isDead_ = true;
+	finished_ = true;
+	Life = false;
 }
 

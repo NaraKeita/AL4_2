@@ -38,6 +38,12 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
+
+	// 天球
+	modelSkyDome_ = Model::CreateFromOBJ("skyDome", true);
+	skyDome_ = new Skydome();
+	skyDome_->Initialize(modelSkyDome_, &viewProjection_);
+
 	// 自キャラの生成
 	player_ = new Player();
 	// 自キャラの初期化
@@ -45,6 +51,7 @@ void GameScene::Initialize() {
 	player_->Initialize(model_ /*, &viewProjection_*/, worldTransform_.translation_);
 
 	GameScene::HP = 3;
+	GameScene::enemyHP = 7;
 
 	//敵の生成
 	enemy_ = new Enemy();
@@ -100,11 +107,26 @@ void GameScene::Initialize() {
 	//軸方向
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetCamera(&viewProjection_);
+
+	// サウンドデータの読み込み
+	soundDataHandle_ = audio_->LoadWave("Boss.wav");
+	// 音声再生
+	audio_->PauseWave(soundDataHandle_);
+	// 第2引数でループ再生を指定
+	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void GameScene::Update() {
+
+	bossTimer += 1;
 	player_->Update();
+	skyDome_->Update();
 	debugCamera_->Update();
+
+	if (bossTimer < 100) {
+		return;
+	}
+
 	enemy_->Update();
 
 	if (enemy_->IsDead() == true) {
@@ -153,6 +175,7 @@ void GameScene::Update() {
 			//enemy_->OnCollision(player_);
 			enemyBullet->OnCollision();
 			player_->OnCollision(enemy_);
+
 			HP -= 1;
 			// 仮の生成処理。後で消す
 			/*deathParticles_ = new DeathParticles;
@@ -172,6 +195,11 @@ void GameScene::Update() {
 
 	if (player_->IsFinished()) {
 		PlayerFinished_ = true;
+	}
+
+	if (PlayerFinished_ == true || EnemyFinished_ == true) {
+		// 音声停止
+		audio_->StopWave(voiceHandle_);
 	}
 }
 
@@ -202,6 +230,9 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	
+	// 天球
+	skyDome_->Draw(viewProjection_);
+
 	// 自キャラの描画
 	player_->Draw(viewProjection_);
 	//敵の描画

@@ -21,7 +21,7 @@ void TitleScene::Initialize() {
 	camera_.Initialize();
 
 	modelFont_ = Model::CreateFromOBJ("titleFont");
-	modelEnemy_ = Model::CreateFromOBJ("enemy");
+	modelEnemy_ = Model::CreateFromOBJ("enemyOpposition");
 
 	worldTransformFont_.Initialize();
 	worldTransformPlayer_.Initialize();

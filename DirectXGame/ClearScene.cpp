@@ -29,7 +29,7 @@ void ClearScene::Initialize() {
 }
 
 void ClearScene::Update() {
-	if (Input::GetInstance()->ReleseKey(DIK_SPACE)) {
+	if (Input::GetInstance()->ReleseKey(DIK_RETURN)) {
 		// 音声停止
 		/*audio_->StopWave(voiceHandle_);*/
 		finished_ = true;

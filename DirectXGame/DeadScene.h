@@ -33,6 +33,9 @@ public:
 
 private:
 	Model* modelFont_ = nullptr;
+	Model* modelPlayer_ = nullptr;
+	// ワールド変換データ
+	WorldTransform worldTransform_;
 
 	// ビュープロジェクション
 	Camera camera_;

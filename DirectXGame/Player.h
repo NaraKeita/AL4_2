@@ -1,10 +1,12 @@
 #pragma once
 #include "PlayerBullet.h"
 #include <list>
+
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
 class Enemy;
+class MobEnemy;
 
 class Player {
 public:
@@ -26,6 +28,8 @@ public:
 
 	Vector3 GetWorldPosition();
 	void OnCollision(const Enemy* enemy);
+	void OnCollision(const MobEnemy* mobEnemy);
+
 
 	bool IsFinished() { return finished_; }
 

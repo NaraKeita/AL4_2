@@ -115,9 +115,12 @@
     <ClCompile Include="InputEx.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityForText.cpp" />
+    <ClCompile Include="MobEnemy.cpp" />
+    <ClCompile Include="MobScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="Skydome.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WorldTransformEx.cpp" />
   </ItemGroup>
@@ -204,9 +207,12 @@
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="MathUtilityForText.h" />
+    <ClInclude Include="MobEnemy.h" />
+    <ClInclude Include="MobScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="Skydome.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

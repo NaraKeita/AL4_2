@@ -6,6 +6,7 @@ using namespace KamataEngine;
 #include "PlayerBullet.h"
 #include "Enemy.h"
 #include "DeathParticles.h"
+#include "Skydome.h"
 
 /// <summary>
 /// ゲームシーン
@@ -29,6 +30,7 @@ public: // メンバ関数
 	void Initialize();
 
 	int HP;
+	int enemyHP;
 
 	/// <summary>
 	/// 毎フレーム処理
@@ -45,6 +47,10 @@ public: // メンバ関数
 	bool PlayerIsFinished() const { return PlayerFinished_; }
 	bool EnemyIsFinished() const { return EnemyFinished_; }
 
+	// 天球
+	Skydome* skyDome_ = nullptr;
+	Model* modelSkyDome_ = nullptr;
+
 private: // メンバ変数
 	// 終了フラグ
 	bool PlayerFinished_ = false;
@@ -58,6 +64,14 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 	//弾
 	PlayerBullet* playerBullet_ = nullptr;
+
+	// ボスが現れるまでの時間
+	int bossTimer = 0;
+
+	// サウドデータハンドル
+	uint32_t soundDataHandle_ = 0;
+	// 音声再生ハンドル
+	uint32_t voiceHandle_ = 0;
 	
 	// UI
 	uint32_t playerLifeTexture3_ = 0;
@@ -96,7 +110,7 @@ private: // メンバ変数
 	Sprite* enemySprite1_ = nullptr;
 	Sprite* enemySprite0_ = nullptr;
 
-	int enemyHP = 7;
+	//int enemyHP = 7;
 
 	// プレイヤーのモデル
 	Model* model_ = nullptr;

@@ -44,6 +44,27 @@ void Enemy::Update() {
 		return false;
 	});
 
+	worldTransform_.translation_.x += LeftRightSpeed;
+	worldTransform_.translation_.y += UpDownSpeed;
+	if (worldTransform_.translation_.x > 10) {
+		LeftRightSpeed = -0.3f;
+	}
+	if (worldTransform_.translation_.y > 10) {
+		UpDownSpeed = -0.3f;
+	}
+	if (worldTransform_.translation_.x < -10) {
+		LeftRightSpeed = 0.3f;
+	}
+	if (worldTransform_.translation_.y < -10) {
+		UpDownSpeed = 0.3f;
+	}
+	if (rand() % 100 == 0) {
+		LeftRightSpeed *= -1;
+	}
+	if (rand() % 90 == 0) {
+		UpDownSpeed *= -1;
+	}
+
 	//移動   
 	switch (phase_) {
 	case Phase::Approach:
@@ -95,7 +116,7 @@ void Enemy::Approach() {
 void Enemy::Fire() {
 	assert(player_);
 	// 弾の速さ（調整項目）
-	const float kBulletSpeed = 0.5f;
+	const float kBulletSpeed = 1.0f;
 	// 自キャラのワールド座標を取得する
 	Vector3 targetPos = player_->GetWorldPosition();
 	// 敵キャラのワールド座標を取得する
@@ -118,7 +139,7 @@ void Enemy::Fire() {
 
 void Enemy::Attack() {
 	timer_++;
-	if (timer_ >= 50.0f) {
+	if (timer_ >= 10.0f) {
 		flag = 1;
 	} else {
 		flag = 0;
