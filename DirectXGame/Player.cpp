@@ -4,14 +4,14 @@
 
 Player::~Player() { delete bullet_; }
 
-void Player::Initialize(Model* model, uint32_t textureHandle, const KamataEngine::Vector3& position) {
+void Player::Initialize(Model* model, const KamataEngine::Vector3& position) {
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
 	//NULLポインタをチェックする
 	assert(model);
 	//引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
-	textureHandle_ = textureHandle;
+	//textureHandle_ = textureHandle;
 	
 	worldTransform_.translation_ = position;
 	// ワールド変換の初期化
@@ -21,7 +21,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle, const KamataEngine
 
 void Player::Update() {
 	worldTransform_.UpdateMatrix();
-
+	//model_ = Model::CreateFromOBJ("enemy");
 	// 行列更新
 	worldTransform_.matWorld_ = MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 
@@ -30,7 +30,7 @@ void Player::Update() {
 	//キャラクターの移動ベクトル
 	Vector3 move = {0, 0, 0};
 	//キャラクターの移動速さ
-	const float kCharacterSpeed = 0.5f;
+	const float kCharacterSpeed = 1.5f;
 
 	// デスフラグのたった弾を削除
 	bullets_.remove_if([](PlayerBullet* bullet) {
@@ -59,11 +59,11 @@ void Player::Update() {
 	worldTransform_.translation_.x += move.x;
 	worldTransform_.translation_.y += move.y;
 
-	ImGui::Begin("Debug1");
-	//flo
-	ImGui::InputFloat3("InputFloat3", &worldTransform_.translation_.x);
-	ImGui::SliderFloat3("SliderFloat3", &worldTransform_.translation_.x, -10.0f, 10.0f);
-	ImGui::End();
+	//ImGui::Begin("Debug1");
+	////flo
+	//ImGui::InputFloat3("InputFloat3", &worldTransform_.translation_.x);
+	//ImGui::SliderFloat3("SliderFloat3", &worldTransform_.translation_.x, -10.0f, 10.0f);
+	//ImGui::End();
 
 	// 移動限界座標
 	const float kMoveLimitX = 35;
@@ -89,7 +89,7 @@ void Player::Update() {
 
 void Player::Draw(Camera& camera) {
 	if (Life == true) {
-		model_->Draw(worldTransform_, camera, textureHandle_);
+		model_->Draw(worldTransform_, camera);
 	}
 
 	// 弾更新

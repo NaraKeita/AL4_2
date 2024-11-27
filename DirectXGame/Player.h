@@ -13,7 +13,7 @@ public:
 	//デストラクタ
 	~Player();
 
-	void Initialize(Model* model, uint32_t textureHandle, const Vector3& position);
+	void Initialize(Model* model, const Vector3& position);
 
 	void Update();
 	void Draw(Camera& viewProjection);

@@ -5,7 +5,7 @@
 
 Enemy::~Enemy() { delete bullet_; }
 
-void Enemy::Initialize(Model* model, uint32_t textureHandle) {
+void Enemy::Initialize(Model* model) {
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	// NULLポインタをチェックする
@@ -14,7 +14,7 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	//input_ = Input::GetInstance();
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
-	textureHandle_ = textureHandle;
+	//textureHandle_ = textureHandle;
 
 	worldTransform_.translation_ = {2, 2, 20};
 
@@ -33,7 +33,7 @@ void Enemy::Update() {
 	if (worldTransform_.translation_.z)
 	//worldTransform_.translation_.z -= 0.1f;
 	//worldTransform_.rotation_.x -= 0.1f;
-
+	model_ = Model::CreateFromOBJ("enemy");
 	//移動   
 
 	switch (phase_) {
@@ -70,7 +70,7 @@ void Enemy::Update() {
 void Enemy::Draw(Camera& camera) {
 	// modelの描画
 	if (Life == true) {
-		model_->Draw(worldTransform_, camera, textureHandle_);
+		model_->Draw(worldTransform_, camera/*, textureHandle_*/);
 	}
 
 	for (EnemyBullet* bullet : bullets_) {

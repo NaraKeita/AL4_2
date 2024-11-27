@@ -8,7 +8,7 @@ void EnemyBullet::Initialize(Model* model, const Vector3& position, const Vector
 
 	model_ = model;
 	// テクスチャ読み込み
-	textureHandle_ = TextureManager::Load("black1x1.png");
+	model_ = Model::CreateFromOBJ("enemyBullet");
 	worldTransform_.Initialize();
 
 	// ワールドトランスフォームの初期化
@@ -40,7 +40,7 @@ void EnemyBullet::Update() {
 
 void EnemyBullet::Draw(const Camera& camera) {
 	// modelの描画
-	model_->Draw(worldTransform_, camera, textureHandle_);
+	model_->Draw(worldTransform_, camera/*, textureHandle_*/);
 }
 
 void EnemyBullet::Hit() {}

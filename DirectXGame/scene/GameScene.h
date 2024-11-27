@@ -66,7 +66,7 @@ private: // メンバ変数
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 	uint32_t bulletText_ = 0;
-	uint32_t enemyText_ = 0;
+	
 	WorldTransform worldTransform_;
 	// ビュープロジェクション
 	Camera viewProjection_;

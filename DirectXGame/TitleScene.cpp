@@ -6,7 +6,7 @@ TitleScene::TitleScene() {}
 
 TitleScene::~TitleScene() {
 	delete modelFont_;
-	delete modelPlayer_;
+	delete modelEnemy_;
 	delete fade_;
 	finished_ = false;
 }
@@ -21,15 +21,15 @@ void TitleScene::Initialize() {
 	camera_.Initialize();
 
 	modelFont_ = Model::CreateFromOBJ("titleFont");
-	modelPlayer_ = Model::CreateFromOBJ("player");
+	modelEnemy_ = Model::CreateFromOBJ("enemy");
 
 	worldTransformFont_.Initialize();
 	worldTransformPlayer_.Initialize();
 
 	worldTransformFont_.translation_.y = 10;
-	worldTransformPlayer_.translation_.y = -8;
+	worldTransformPlayer_.translation_.y = -11;
 	worldTransformFont_.scale_ = {2, 2, 2};
-	worldTransformPlayer_.scale_ = {8, 8, 8};
+	worldTransformPlayer_.scale_ = {2, 2, 2};
 	worldTransformPlayer_.rotation_.y = std::numbers::pi_v<float>;
 
 	// フェード
@@ -85,7 +85,7 @@ void TitleScene::Draw() {
 
 	// ここに3Dオブジェクトの描画処理を追加できる
 	modelFont_->Draw(worldTransformFont_, camera_);
-	modelPlayer_->Draw(worldTransformPlayer_, camera_);
+	modelEnemy_->Draw(worldTransformPlayer_, camera_);
 
 	// 3Dオブジェクト描画処理後
 	Model::PostDraw();

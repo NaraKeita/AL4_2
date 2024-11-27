@@ -8,7 +8,8 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vecto
 
 	model_ = model;
 	//テクスチャ読み込み
-	textureHandle_ = TextureManager::Load("black1x1.png");
+	//textureHandle_ = TextureManager::Load("black1x1.png");
+	model_ = Model::CreateFromOBJ("player");
 	worldTransform_.Initialize();
 
 	//ワールドトランスフォームの初期化
@@ -34,7 +35,7 @@ void PlayerBullet::Update() {
 
 void PlayerBullet::Draw(const Camera& camera) {
 	//modelの描画
-	model_->Draw(worldTransform_, camera, textureHandle_);
+	model_->Draw(worldTransform_, camera/*, textureHandle_*/);
 }
 
 

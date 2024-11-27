@@ -15,7 +15,7 @@ enum class Phase {
 class Enemy {
 public:
 	~Enemy();
-	void Initialize(Model* model, uint32_t textureHandle);
+	void Initialize(Model* model);
 	void Update();
 	void Draw(Camera& viewProjection);
 	void Approach();
@@ -32,11 +32,8 @@ public:
 
 	int flag;
 	float timer_;
-
-	void OnCollision(const Player* player);
-
 	// 衝突応答
-	//void OnCollision(const Player* player);
+	void OnCollision(const Player* player);
 
 	bool IsFinished() { return isFinished_; }
 
@@ -61,8 +58,8 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0u;
-
+	//uint32_t textureHandle_ = 0u;
+	//Model* enemyText_ = nullptr;
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
 
 	// 弾

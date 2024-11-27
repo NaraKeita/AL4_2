@@ -1,7 +1,7 @@
 #pragma once
 #include <KamataEngine.h>
 using namespace KamataEngine;
-#include "Player.h"
+#include "Enemy.h"
 #include"Fade.h"
 #include <vector>
 
@@ -40,7 +40,7 @@ private:
 	bool finished_ = false;
 
 	Model* modelFont_ = nullptr;
-	Model* modelPlayer_ = nullptr;
+	Model* modelEnemy_ = nullptr;
 
 	// ビュープロジェクション
 	Camera camera_;

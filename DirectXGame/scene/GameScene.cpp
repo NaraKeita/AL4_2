@@ -19,11 +19,13 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 	// ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("mario.jpg");
+	//textureHandle_ = TextureManager::Load("mario.jpg");
+	
 	bulletText_ = TextureManager::Load("black1x1.png");
 
 	//モデル
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("player");
+	
 	//ワールドトランスフォーム
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
@@ -32,18 +34,18 @@ void GameScene::Initialize() {
 	player_ = new Player();
 	// 自キャラの初期化
 
-	player_->Initialize(model_, textureHandle_ /*, &viewProjection_*/, worldTransform_.translation_);
+	player_->Initialize(model_ /*, &viewProjection_*/, worldTransform_.translation_);
 	//敵の生成
 	enemy_ = new Enemy();
 	//敵の初期化
-	enemy_->Initialize(model_, textureHandle_);
+	enemy_->Initialize(model_);
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;
 
 	//敵キャラに自キャラのアドレスを渡す
 	enemy_->SetPlayer(player_);
 	
-		modelDeathParticle_ = Model::CreateFromOBJ("DeathParticle", true);
+	modelDeathParticle_ = Model::CreateFromOBJ("DeathParticle", true);
 	
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);

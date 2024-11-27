@@ -39,6 +39,6 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0u;
+	//uint32_t textureHandle_ = 0u;
 	
 };
