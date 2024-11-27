@@ -123,7 +123,7 @@ private: // メンバ変数
 	// ビュープロジェクション
 	Camera viewProjection_;
 	//デバッグカメラ
-	DebugCamera* debugCamera_ = nullptr;
+	//DebugCamera* debugCamera_ = nullptr;
 
 	// パーティクル
 	DeathParticles* deathParticles_ = nullptr;

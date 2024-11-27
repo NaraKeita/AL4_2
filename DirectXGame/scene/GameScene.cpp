@@ -14,7 +14,7 @@ GameScene::~GameScene() {
 	// 自キャラの開放
 	delete model_;
 	delete player_;
-	delete debugCamera_;
+	//delete debugCamera_;
 	delete enemy_;
 	delete modelDeathParticle_;
 }
@@ -57,8 +57,8 @@ void GameScene::Initialize() {
 	enemy_ = new Enemy();
 	//敵の初期化
 	enemy_->Initialize(model_);
-	const uint32_t kNumBlockVirtical = 20;
-	const uint32_t kNumBlockHorizontal = 100;
+	//const uint32_t kNumBlockVirtical = 20;
+	//const uint32_t kNumBlockHorizontal = 100;
 
 	//敵キャラに自キャラのアドレスを渡す
 	enemy_->SetPlayer(player_);
@@ -102,7 +102,7 @@ void GameScene::Initialize() {
 	enemySprite0_ = Sprite::Create(enemyLifeTexture0_, {0, 0});
 	
 	//デバッグカメラの生成
-	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
+	//debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
 
 	//軸方向
 	AxisIndicator::GetInstance()->SetVisible(true);
@@ -121,7 +121,7 @@ void GameScene::Update() {
 	bossTimer += 1;
 	player_->Update();
 	skyDome_->Update();
-	debugCamera_->Update();
+	//debugCamera_->Update();
 
 	if (bossTimer < 100) {
 		return;
@@ -134,20 +134,20 @@ void GameScene::Update() {
 	if (player_->IsDead() == true) {
 	}
 
-	#ifdef _DEBUG
+	/*#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isDebugCameraActive_ = !isDebugCameraActive_;
 	}
-	#endif
+	#endif*/
 
-	if (isDebugCameraActive_) {
-		debugCamera_->Update();
-		viewProjection_.matView = debugCamera_->GetCamera().matView;
-		viewProjection_.matProjection = debugCamera_->GetCamera().matProjection;
-		viewProjection_.TransferMatrix();
-	} else {
-		viewProjection_.UpdateMatrix();
-	}
+	//if (isDebugCameraActive_) {
+	//	//debugCamera_->Update();
+	//	viewProjection_.matView = debugCamera_->GetCamera().matView;
+	//	viewProjection_.matProjection = debugCamera_->GetCamera().matProjection;
+	//	viewProjection_.TransferMatrix();
+	//} else {
+	//	viewProjection_.UpdateMatrix();
+	//}
 
 	
 	//自機の弾が敵に当たったとき
@@ -197,7 +197,7 @@ void GameScene::Update() {
 		PlayerFinished_ = true;
 	}
 
-	if (PlayerFinished_ == true || EnemyFinished_ == true) {
+	if (HP <= 0 || enemyHP <= 0) {
 		// 音声停止
 		audio_->StopWave(voiceHandle_);
 	}

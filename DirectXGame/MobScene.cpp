@@ -168,7 +168,7 @@ void MobScene::Update() {
 		PlayerFinished_ = true;
 	}
 
-	if (PlayerFinished_ == true || EnemyFinished_ == true) {
+	if (HP <= 0 || EnemyFinished_ == true) {
 		// 音声停止
 		audio_->StopWave(voiceHandle_);
 	}

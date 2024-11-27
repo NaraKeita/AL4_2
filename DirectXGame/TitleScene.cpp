@@ -38,12 +38,12 @@ void TitleScene::Initialize() {
 	fade_->Initialize();
 	fade_->Start(Fade::Status::FadeIn, 1);
 
-	//// サウンドデータの読み込み
-	//soundDataHandle_ = audio_->LoadWave("Title.wav");
-	//// 音声再生
-	//audio_->PauseWave(soundDataHandle_);
-	//// 第2引数でループ再生を指定
-	//voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+	// サウンドデータの読み込み
+	soundDataHandle_ = audio_->LoadWave("Title.wav");
+	// 音声再生
+	audio_->PauseWave(soundDataHandle_);
+	// 第2引数でループ再生を指定
+	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void TitleScene::Update() {
@@ -58,8 +58,8 @@ void TitleScene::Update() {
 
 	// フェードアウトが終了したらゲームシーンに行く
 	if (fade_->IsFadeOutFinished() == true) {
-		//// 音声停止
-		//audio_->StopWave(voiceHandle_);
+		// 音声停止
+		audio_->StopWave(voiceHandle_);
 		finished_ = true;
 	} 
 	

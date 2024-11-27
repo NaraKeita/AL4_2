@@ -24,18 +24,18 @@ void DeadScene::Initialize() {
 	worldTransformFont_.translation_.y = 10;
 	worldTransformFont_.scale_ = {2, 2, 2};
 
-	//// サウンドデータの読み込み
-	// soundDataHandle_ = audio_->LoadWave("Clear.wav");
-	//// 音声再生
-	// audio_->PauseWave(soundDataHandle_);
-	//// 第2引数でループ再生を指定
-	// voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+	// サウンドデータの読み込み
+	 soundDataHandle_ = audio_->LoadWave("Dead.wav");
+	// 音声再生
+	 audio_->PauseWave(soundDataHandle_);
+	// 第2引数でループ再生を指定
+	 voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void DeadScene::Update() {
 	if (Input::GetInstance()->ReleseKey(DIK_SPACE)) {
 		// 音声停止
-		/*audio_->StopWave(voiceHandle_);*/
+		audio_->StopWave(voiceHandle_);
 		finished_ = true;
 	}
 	// タイマーを加算
