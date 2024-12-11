@@ -22,6 +22,7 @@ public:
 	Vector3 GetWorldPosition();
 
 	std::list<PlayerBullet*> bullets_;
+	std::list<PlayerBullet*> GetBullet() { return bullets_; }
 
 private:
 	//ワールド変換データ
