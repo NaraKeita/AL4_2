@@ -76,6 +76,39 @@ void GameScene::Update() {
 		viewProjection_.UpdateMatrix();
 	}
 
+	// 自機の弾が敵に当たったとき
+	std::list<PlayerBullet*> playerBullets = player_->GetBullet();
+	for (PlayerBullet* playerBullet : playerBullets) {
+		Vector3 enemyPosition = enemy_->GetPosition();
+		Vector3 playerBulletPosition = playerBullet->GetPosition();
+		if (abs(playerBulletPosition.x - enemyPosition.x) < 3 && abs(playerBulletPosition.y - enemyPosition.y) < 3 && abs(playerBulletPosition.z - enemyPosition.z) < 3) {
+			// player_->OnCollision(enemy_);
+			playerBullet->OnCollision();
+			enemy_->OnCollision(player_);
+			// 仮の生成処理。後で消す
+			deathParticles_ = new DeathParticles;
+			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
+			enemyHP -= 1;
+		}
+	}
+
+	// 敵の弾が自機に当たったとき
+	std::list<EnemyBullet*> enemyBullets = enemy_->GetBullet();
+	for (EnemyBullet* enemyBullet : enemyBullets) {
+		Vector3 playerPosition = player_->GetPosition();
+		Vector3 enemyBulletPosition = enemyBullet->GetPosition();
+		if (abs(enemyBulletPosition.x - playerPosition.x) < 3 && abs(enemyBulletPosition.y - playerPosition.y) < 3 && abs(enemyBulletPosition.z - playerPosition.z) < 3) {
+			// enemy_->OnCollision(player_);
+			enemyBullet->OnCollision();
+			player_->OnCollision(enemy_);
+
+			HP -= 1;
+			// 仮の生成処理。後で消す
+			/*deathParticles_ = new DeathParticles;
+			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);*/
+		}
+	}
+
 }
 
 void GameScene::Draw() {
