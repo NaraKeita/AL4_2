@@ -24,6 +24,9 @@ public:
 
 	Vector3 velocity_;
 
+	void OnCollision();
+	bool isDead_ = false; 
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
