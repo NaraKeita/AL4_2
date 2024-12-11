@@ -33,3 +33,5 @@ void PlayerBullet::Draw(const Camera& camera) {
 	//modelの描画
 	model_->Draw(worldTransform_, camera, textureHandle_);
 }
+
+void PlayerBullet::OnCollision() { isDead_ = true; }
