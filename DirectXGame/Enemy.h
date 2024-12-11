@@ -18,15 +18,19 @@ public:
 	~Enemy();
 	// キーボード入力
 	Input* input_ = nullptr;
+
 	void Initialize(Model* model, uint32_t textureHandle);
+
 	void Update();
+
 	void Draw(Camera& viewProjection);
+
 	void Approach();
 	/*void MoveApproach();
 	void MoveLeave();*/
 	//弾の発射に使う
 	void Fire();
-	void GetWorldPosition();
+	//void GetWorldPosition();
 	
 		
 	void Attack();
@@ -37,8 +41,8 @@ public:
 	//発射間隔
 	static const int kFireInterval = 60;
 
-	int flag;
-	float timer;
+	//ワールド座標を取得
+	Vector3 GetWorldPosition();
 
 private:
 	// ワールド変換データ
@@ -61,4 +65,7 @@ private:
 	// 自キャラ
 	Player* player_ = nullptr;
 	
+	int shotCoolTimer;
+	static inline const int kShotCoolTimer = 50;
+
 };

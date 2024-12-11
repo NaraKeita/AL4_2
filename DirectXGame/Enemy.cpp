@@ -21,13 +21,8 @@ void Enemy::Initialize(Model* model, uint32_t textureHandle) {
 	
 	// 引数で受け取った初期座標をセット
 	
-
-
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
-
-	flag = 0;
-	timer = 0.0f;
 
 	//接近フェーズ初期化
 	Approach();
@@ -38,7 +33,7 @@ void Enemy::Update() {
 	// ワールドトランスフォームの更新
 	worldTransform_.UpdateMatrix();
 	
-	worldTransform_.translation_.z -= 0.1f;
+	//worldTransform_.translation_.z -= 0.1f;
 	//worldTransform_.rotation_.x -= 0.1f;
 
 	//移動   
@@ -48,7 +43,7 @@ void Enemy::Update() {
 	default:
 		//接近フェーズの更新関数
 		//移動（ベクトルを加算）
-		worldTransform_.translation_.z -= 0.1f;
+		//worldTransform_.translation_.z -= 0.1f;
 		//既定の位置に到達したら離脱
 		if (worldTransform_.translation_.z < 0.0f) {
 			phase_ = Phase::Leave;
@@ -97,6 +92,7 @@ void Enemy::Fire() {
 
 	//弾の速さ（調整項目）
 	const float kBulletSpeed = 0.5f;
+	//Vector3 velocity(0, 0, kBulletSpeed);
 
 	// 自キャラのワールド座標を取得する
 	Vector3 targetPos = player_->GetWorldPosition();
@@ -111,7 +107,7 @@ void Enemy::Fire() {
 
 	//弾を生成し、初期化
 	EnemyBullet* newBullet = new EnemyBullet();
-	newBullet->Initialize(model_, worldTransform_.translation_, velocity_);
+	newBullet->Initialize(model_, worldTransform_.translation_, velocity);
 
 	//弾を登録する
 	bullets_.push_back(newBullet);
@@ -119,30 +115,24 @@ void Enemy::Fire() {
 }
 
 void Enemy::Attack() {
-	timer++;
-	if (timer >= 50.0f) {
-		flag = 1;
-	} else {
-		flag = 0;
-	}
+	shotCoolTimer++;
 
-	if (flag == 1) {
+	if (shotCoolTimer >= kShotCoolTimer) {
 		if (bullet_) {
 			delete bullet_;
 			bullet_ = nullptr;
 		}
-
-		// 弾の速度
-		const float kBulletSpeed = 1.0f;
-		Vector3 velocity(0, 0, kBulletSpeed);
-
-		// 弾を生成し、初期化
-		EnemyBullet* newBullet = new EnemyBullet();
-		newBullet->Initialize(model_, worldTransform_.translation_, velocity);
-
-		// 弾を登録する
-		bullets_.push_back(newBullet);
-		timer = 0.0f;
-
+		Fire();
+		shotCoolTimer = 0;
 	}
+}
+
+Vector3 Enemy::GetWorldPosition() {
+	// ワールド座標を入れる変数
+	Vector3 worldPos;
+	// ワールド行列の平行移動成分を取得（ワールド座標）
+	worldPos.x = worldTransform_.translation_.x;
+	worldPos.y = worldTransform_.translation_.y;
+	worldPos.z = worldTransform_.translation_.z;
+	return worldPos;
 }

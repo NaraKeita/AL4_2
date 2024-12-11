@@ -35,10 +35,16 @@ void GameScene::Initialize() {
 	player_->Initialize(model_, textureHandle_/*, &viewProjection_*/);
 	//敵の生成
 	enemy_ = new Enemy();
+
+	//Vector3 enemyPosition(30, 2.0f, 50.0f);
+
 	//敵の初期化
 	enemy_->Initialize(model_, textureHandle_);
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;
+
+	// 敵キャラに自キャラのアドレスを渡す
+	enemy_->SetPlayer(player_);
 
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
@@ -47,8 +53,6 @@ void GameScene::Initialize() {
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetCamera(&viewProjection_);
 
-	// 敵キャラに自キャラのアドレスを渡す
-	enemy_->SetPlayer(player_);
 
 }
 
