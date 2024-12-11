@@ -5,7 +5,7 @@
 
 MobEnemy::~MobEnemy() { delete bullet_; }
 
-void MobEnemy::Initialize(Model* model, uint32_t textureHandle, Vector3 pos_) {
+void MobEnemy::Initialize(Model* model/*, uint32_t textureHandle*/, Vector3 pos_) {
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	// NULLポインタをチェックする
@@ -14,7 +14,7 @@ void MobEnemy::Initialize(Model* model, uint32_t textureHandle, Vector3 pos_) {
 	// input_ = Input::GetInstance();
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
-	textureHandle_ = textureHandle;
+	//textureHandle_ = textureHandle;
 
 	worldTransform_.translation_ = pos_;
 
@@ -74,7 +74,7 @@ void MobEnemy::Update() {
 void MobEnemy::Draw(Camera& camera) {
 	// modelの描画
 	if (Life == true) {
-		model_->Draw(worldTransform_, camera, textureHandle_);
+		model_->Draw(worldTransform_, camera);
 	}
 
 	for (EnemyBullet* bullet : bullets_) {

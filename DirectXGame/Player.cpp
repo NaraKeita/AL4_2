@@ -102,15 +102,15 @@ void Player::Rotate() {
 	//-----------追加-------------//
 	
 	
-	// 回転速さ[ラジアン/frame]
-	const float kRotSpeed = 0.1f;
+	//// 回転速さ[ラジアン/frame]
+	//const float kRotSpeed = 0.1f;
 
-	// 押した方向で移動ベクトルを変更
-	if (input_->PushKey(DIK_Q)) {
-		worldTransform_.rotation_.y -= kRotSpeed;
-	} else if (input_->PushKey(DIK_E)) {
-		worldTransform_.rotation_.y += kRotSpeed;
-	}
+	//// 押した方向で移動ベクトルを変更
+	//if (input_->PushKey(DIK_Q)) {
+	//	worldTransform_.rotation_.y -= kRotSpeed;
+	//} else if (input_->PushKey(DIK_E)) {
+	//	worldTransform_.rotation_.y += kRotSpeed;
+	//}
 
 	//---------------------------//
 }

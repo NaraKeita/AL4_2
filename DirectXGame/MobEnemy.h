@@ -9,7 +9,7 @@ class Player; // 自機クラスの前方宣言
 class MobEnemy {
 public:
 	~MobEnemy();
-	void Initialize(Model* model, uint32_t textureHandle, Vector3 pos_);
+	void Initialize(Model* model/*, uint32_t textureHandle,*/, Vector3 pos_);
 	void Update();
 	void Draw(Camera& camera);
 	void Approach();
@@ -55,7 +55,7 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0u;
+	//uint32_t textureHandle_ = 0u;
 
 	Vector3 velocityLeave_ = {-0.3f, 0.3f, -0.1f};
 

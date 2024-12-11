@@ -19,11 +19,12 @@ void MobScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 	// ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("mario.jpg");
-	bulletText_ = TextureManager::Load("black1x1.png");
+	//textureHandle_ = TextureManager::Load("mario.jpg");
+	//bulletText_ = TextureManager::Load("black1x1.png");
 
 	// モデル
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("player");
+	mobModel_ = Model::CreateFromOBJ("mob");
 	// ワールドトランスフォーム
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
@@ -42,10 +43,10 @@ void MobScene::Initialize() {
 		mobEnemy_n[i] = new MobEnemy();
 	}
 	// モブ敵の初期化
-	mobEnemy_n[0]->Initialize(model_, textureHandle_, {30, -20, 20});
-	mobEnemy_n[1]->Initialize(model_, textureHandle_, {-30, -20, 20});
-	mobEnemy_n[2]->Initialize(model_, textureHandle_, {30, 14, 20});
-	mobEnemy_n[3]->Initialize(model_, textureHandle_, {-30, 14, 20});
+	mobEnemy_n[0]->Initialize(mobModel_, {30, -20, 20});
+	mobEnemy_n[1]->Initialize(mobModel_, {-30, -20, 20});
+	mobEnemy_n[2]->Initialize(mobModel_, {30, 14, 20});
+	mobEnemy_n[3]->Initialize(mobModel_, {-30, 14, 20});
 
 	const uint32_t kNumBlockVirtical = 20;
 	const uint32_t kNumBlockHorizontal = 100;

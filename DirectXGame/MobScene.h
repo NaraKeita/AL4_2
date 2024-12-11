@@ -68,8 +68,10 @@ private: // メンバ変数
 	// プレイヤーのモデル
 	Model* model_ = nullptr;
 
+	Model* mobModel_ = nullptr;
+
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0;
+	//uint32_t textureHandle_ = 0;
 	uint32_t bulletText_ = 0;
 	uint32_t enemyText_ = 0;
 	WorldTransform worldTransform_;
