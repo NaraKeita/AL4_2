@@ -28,12 +28,12 @@ public:
 	void Approach();
 	/*void MoveApproach();
 	void MoveLeave();*/
+
 	//弾の発射に使う
 	void Fire();
-	//void GetWorldPosition();
-	
-		
 	void Attack();
+
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 
 	void SetPlayer(Player* player) { player_ = player; }
 
