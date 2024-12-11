@@ -26,6 +26,7 @@ public:
 
 	void OnCollision();
 	bool isDead_ = false; 
+	Vector3 GetPosition() { return worldTransform_.translation_; }
 
 private:
 	// ワールド変換データ
