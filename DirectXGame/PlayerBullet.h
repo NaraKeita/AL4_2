@@ -25,9 +25,16 @@ public:
 	Vector3 velocity_;
 
 	void OnCollision();
+
+	
+	//デスタイマー
+	int32_t deathTimer_ = kLifeTimer;
 	bool isDead_ = false; 
+
 	Vector3 GetPosition() { return worldTransform_.translation_; }
 	bool IsDead() const { return isDead_; }
+	// 弾が表示される時間
+	static const int32_t kLifeTimer = 60 * 6;
 
 private:
 	// ワールド変換データ
