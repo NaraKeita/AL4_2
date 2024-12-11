@@ -47,11 +47,11 @@ void Player::Update() {
 	worldTransform_.translation_.x += move.x;
 	worldTransform_.translation_.y += move.y;
 
-	ImGui::Begin("Debug1");
-	//flo
-	ImGui::InputFloat3("InputFloat3", &worldTransform_.translation_.x);
-	ImGui::SliderFloat3("SliderFloat3", &worldTransform_.translation_.x, -10.0f, 10.0f);
-	ImGui::End();
+	//ImGui::Begin("Debug1");
+	////flo
+	//ImGui::InputFloat3("InputFloat3", &worldTransform_.translation_.x);
+	//ImGui::SliderFloat3("SliderFloat3", &worldTransform_.translation_.x, -10.0f, 10.0f);
+	//ImGui::End();
 
 	// 移動限界座標
 	const float kMoveLimitX = 35;
