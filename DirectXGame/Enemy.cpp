@@ -59,6 +59,15 @@ void Enemy::Update() {
 	
 	}
 
+	// デスフラグのたった弾を削除
+	bullets_.remove_if([](EnemyBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
+
 	// キャラクター攻撃処理
 	Attack();
 
