@@ -127,6 +127,13 @@ void Enemy::Attack() {
 	}
 }
 
+void Enemy::OnCollision(const Player* player) {
+	(void)player;
+	/*isDead_ = true;
+	isFinished_ = true;
+	Life = false;*/
+}
+
 Vector3 Enemy::GetWorldPosition() {
 	// ワールド座標を入れる変数
 	Vector3 worldPos;
