@@ -38,8 +38,12 @@ public:
 	void SetPlayer(Player* player) { player_ = player; }
 
 	std::list<EnemyBullet*> bullets_;
+	std::list<EnemyBullet*> GetBullet() { return bullets_; }
 	//発射間隔
 	static const int kFireInterval = 60;
+
+	// 衝突応答
+	void OnCollision(const Player* player);
 
 	//ワールド座標を取得
 	Vector3 GetWorldPosition();

@@ -4,6 +4,8 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
+class Enemy;
+
 class Player {
 public:
 	// キーボード入力
@@ -17,6 +19,11 @@ public:
 	void Draw(Camera& viewProjection);
 	void Rotate();
 	void Attack();
+
+	Vector3 GetPosition() { return worldTransform_.translation_; }
+
+	// 衝突応答
+	void OnCollision(const Enemy* enemy);
 
 	//ワールド座標を取得
 	Vector3 GetWorldPosition();

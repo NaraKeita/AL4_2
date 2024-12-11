@@ -82,13 +82,8 @@ void GameScene::Update() {
 		Vector3 enemyPosition = enemy_->GetPosition();
 		Vector3 playerBulletPosition = playerBullet->GetPosition();
 		if (abs(playerBulletPosition.x - enemyPosition.x) < 3 && abs(playerBulletPosition.y - enemyPosition.y) < 3 && abs(playerBulletPosition.z - enemyPosition.z) < 3) {
-			// player_->OnCollision(enemy_);
 			playerBullet->OnCollision();
 			enemy_->OnCollision(player_);
-			// 仮の生成処理。後で消す
-			deathParticles_ = new DeathParticles;
-			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);
-			enemyHP -= 1;
 		}
 	}
 
@@ -101,11 +96,6 @@ void GameScene::Update() {
 			// enemy_->OnCollision(player_);
 			enemyBullet->OnCollision();
 			player_->OnCollision(enemy_);
-
-			HP -= 1;
-			// 仮の生成処理。後で消す
-			/*deathParticles_ = new DeathParticles;
-			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);*/
 		}
 	}
 
