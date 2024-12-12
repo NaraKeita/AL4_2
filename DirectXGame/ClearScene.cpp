@@ -7,6 +7,7 @@ ClearScene::~ClearScene() {
 	finished_ = false;
 }
 
+
 void ClearScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
