@@ -37,8 +37,13 @@ public: // メンバ関数
 	void Draw();
 	bool isDebugCameraActive_ = false;
 
+	// デスフラグのgetter
+	bool IsFinished() const { return finished_; }
+
 
 private: // メンバ変数
+	// 終了フラグ
+	bool finished_ = false;
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;

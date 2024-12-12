@@ -11,6 +11,7 @@ GameScene::~GameScene() {
 	delete model_;
 	delete player_;
 	delete debugCamera_;
+	finished_ = false;
 }
 
 void GameScene::Initialize() {
@@ -60,6 +61,10 @@ void GameScene::Update() {
 		viewProjection_.TransferMatrix();
 	} else {
 		viewProjection_.UpdateMatrix();
+	}
+
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		finished_ = true;
 	}
 
 }
