@@ -185,7 +185,6 @@ void ChangeScene() {
 	}
 }
 
-
 // 現在シーン更新
 void UpdateScene() {
 	switch (scene) {
