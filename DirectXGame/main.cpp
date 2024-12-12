@@ -5,7 +5,6 @@ using namespace KamataEngine;
 #include "BadEndScene.h"
 #include "ClearScene.h"
 
-
 // シーン（型）
 enum class Scene {
 	kTitle,
@@ -14,7 +13,7 @@ enum class Scene {
 	kClear,
 };
 
-// 現在シーン（型）
+// 現在（最初に現れる画面）のシーン
 Scene scene = Scene::kTitle;
 
 void ChangeScene();
