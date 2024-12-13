@@ -36,6 +36,7 @@ void GameScene::Initialize() {
 	skydome_->Initialize(modelSkydome_, &viewProjection_);
 
 	//skydomeの生成
+	skydome_ = new Skydome();
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	// 自キャラの生成
