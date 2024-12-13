@@ -1,6 +1,6 @@
 #pragma once
-#include "WorldTransform.h"
-#include "Model.h"
+#include <KamataEngine.h>
+using namespace KamataEngine;
 
 
 class Skydome {
@@ -8,7 +8,7 @@ public:
 	//<summary>
 	//初期化
 	//</summary>
-	void Initialize(Model* model, ViewProjection* viewProjection);
+	void Initialize(Model* modelSkydome_, Camera* camera);
 
 	//<summary>
 	//更新
@@ -24,10 +24,8 @@ public:
 		//ワールド変換データ
 	    WorldTransform worldTransform_;
 		//モデル
-	    Model* model_ = nullptr;
-
-		Model* modelSkydome_ = nullptr;
+		Model* model_ = nullptr;
 	    // テクスチャハンドル
-	   
-		ViewProjection* viewProjection_ = nullptr;
+	  
+		Camera* camera_ = nullptr;
 };

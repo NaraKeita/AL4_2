@@ -1,3 +1,5 @@
+#include <KamataEngine.h>
+using namespace KamataEngine;
 #include "GameScene.h"
 #include <cassert>
 
@@ -12,6 +14,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete debugCamera_;
 	delete enemy_;
+	delete modelSkydome_;
 }
 
 void GameScene::Initialize() {
@@ -29,6 +32,12 @@ void GameScene::Initialize() {
 	worldTransform_.Initialize();
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
+
+	skydome_->Initialize(modelSkydome_, &camera_);
+
+	//skydomeの生成
+	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
+
 	// 自キャラの生成
 	player_ = new Player();
 	// 自キャラの初期化
