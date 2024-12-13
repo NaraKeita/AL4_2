@@ -60,7 +60,7 @@ private: // メンバ変数
 	Skydome* skydome_ = nullptr;
 
 	//SkyDomeのモデル
-	Skydome* modelSkydome_ = nullptr;
+	Model* modelSkydome_ = nullptr;
 
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
