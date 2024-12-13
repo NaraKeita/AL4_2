@@ -33,7 +33,7 @@ void GameScene::Initialize() {
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 
-	skydome_->Initialize(modelSkydome_, &camera_);
+	skydome_->Initialize(modelSkydome_, &viewProjection_);
 
 	//skydomeの生成
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);

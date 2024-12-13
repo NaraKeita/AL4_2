@@ -27,5 +27,5 @@ public:
 		Model* model_ = nullptr;
 	    // テクスチャハンドル
 	  
-		Camera* camera_ = nullptr;
+		Camera* viewProjection_ = nullptr;
 };
