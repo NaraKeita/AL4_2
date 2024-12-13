@@ -3,9 +3,9 @@
 
 void Skydome::Initialize(Model* model, Camera* viewProjection) {
 	assert(model);
-	worldTransform_.Initialize();
 	model_ = model;
 	viewProjection_ = viewProjection;
+	worldTransform_.Initialize();
 }
 
 void Skydome::Update() { worldTransform_.UpdateMatrix(); }
