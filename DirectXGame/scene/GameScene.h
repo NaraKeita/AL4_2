@@ -50,6 +50,7 @@ private: // メンバ変数
 
 	//弾
 	PlayerBullet* playerBullet_ = nullptr;
+	EnemyBullet* enemyBullet_ = nullptr;
 
 	//敵
 	Enemy* enemy_ = nullptr;
