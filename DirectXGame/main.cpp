@@ -1,7 +1,33 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
+#include "ClearScene.h"
+#include "DeadScene.h"
+#include "MobScene.h"
+#include "TitleScene.h"
 #include "scene/GameScene.h"
 
+// シーン（型）
+enum class Scene {
+	kUnknown = 0,
+	kTitle,
+	kMobGame,
+	kGame,
+	kClear,
+	kDead,
+};
+
+// 現在シーン（型）
+Scene scene = Scene::kUnknown;
+
+void ChangeScene();
+void UpdateScene();
+void DrawScene();
+
+GameScene* gameScene = nullptr;
+TitleScene* titleScene = nullptr;
+ClearScene* clearScene = nullptr;
+DeadScene* deadScene = nullptr;
+MobScene* mobScene = nullptr;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
