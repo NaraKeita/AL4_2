@@ -54,8 +54,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma endregion
 
 	// ゲームシーンの初期化
-	gameScene = new GameScene();
-	gameScene->Initialize();
+	titleScene = new TitleScene();
+	titleScene->Initialize();
+	scene = Scene::kTitle;
 
 	// メインループ
 	while (true) {
