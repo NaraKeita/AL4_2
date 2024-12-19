@@ -2,7 +2,7 @@
 using namespace KamataEngine;
 #include "scene/GameScene.h"
 
-//2_1_確認課題
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WinApp* win = nullptr;
@@ -16,7 +16,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow(L"LE2D_13_ナラ_ケイタ_AL4_");
+	win->CreateGameWindow(L"冬休み評価課題");
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
