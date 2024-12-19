@@ -91,6 +91,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 各種解放
 	delete gameScene;
+	delete titleScene;
+	delete clearScene;
+	delete deadScene;
+	delete mobScene;
+
+	// 各種解放
+	delete gameScene;
 	// 3Dモデル解放
 	Model::StaticFinalize();
 	audio->Finalize();
