@@ -47,16 +47,16 @@ void Enemy::Update() {
 	worldTransform_.translation_.x += LeftRightSpeed;
 	worldTransform_.translation_.y += UpDownSpeed;
 	if (worldTransform_.translation_.x > 10) {
-		LeftRightSpeed = -0.3f;
+		LeftRightSpeed = -0.1f;
 	}
 	if (worldTransform_.translation_.y > 10) {
-		UpDownSpeed = -0.3f;
+		UpDownSpeed = -0.1f;
 	}
 	if (worldTransform_.translation_.x < -10) {
-		LeftRightSpeed = 0.3f;
+		LeftRightSpeed = 0.1f;
 	}
 	if (worldTransform_.translation_.y < -10) {
-		UpDownSpeed = 0.3f;
+		UpDownSpeed = 0.1f;
 	}
 	if (rand() % 100 == 0) {
 		LeftRightSpeed *= -1;
@@ -139,7 +139,7 @@ void Enemy::Fire() {
 
 void Enemy::Attack() {
 	timer_++;
-	if (timer_ >= 10.0f) {
+	if (timer_ >= 20.0f) {
 		flag = 1;
 	} else {
 		flag = 0;

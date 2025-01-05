@@ -21,7 +21,7 @@ void ClearScene::Initialize() {
 	worldTransformFont_.scale_ = {2, 2, 2};
 
 	// サウンドデータの読み込み
-	soundDataHandle_ = audio_->LoadWave("Clear.wav");
+	soundDataHandle_ = audio_->LoadWave("nagagutsudeodekake.mp3");
 	// 音声再生
 	audio_->PauseWave(soundDataHandle_);
 	// 第2引数でループ再生を指定

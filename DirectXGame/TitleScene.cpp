@@ -21,7 +21,7 @@ void TitleScene::Initialize() {
 	camera_.Initialize();
 
 	modelFont_ = Model::CreateFromOBJ("titleFont");
-	modelEnemy_ = Model::CreateFromOBJ("enemyOpposition");
+	modelEnemy_ = Model::CreateFromOBJ("enemy");
 
 	worldTransformFont_.Initialize();
 	worldTransformPlayer_.Initialize();
@@ -39,7 +39,7 @@ void TitleScene::Initialize() {
 	fade_->Start(Fade::Status::FadeIn, 1);
 
 	// サウンドデータの読み込み
-	soundDataHandle_ = audio_->LoadWave("Title.wav");
+	soundDataHandle_ = audio_->LoadWave("yuruyakanaasayake.mp3");
 	// 音声再生
 	audio_->PauseWave(soundDataHandle_);
 	// 第2引数でループ再生を指定
@@ -49,7 +49,7 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 
 	// SPACEキーを押すとフェードアウトを開始
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 		if (phase_ != Phase::kFadeOut) {
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1);
@@ -85,7 +85,7 @@ void TitleScene::Draw() {
 
 	// ここに3Dオブジェクトの描画処理を追加できる
 	modelFont_->Draw(worldTransformFont_, camera_);
-	modelEnemy_->Draw(worldTransformPlayer_, camera_);
+	//modelEnemy_->Draw(worldTransformPlayer_, camera_);
 
 	// 3Dオブジェクト描画処理後
 	Model::PostDraw();

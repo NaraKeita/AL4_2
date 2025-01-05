@@ -115,8 +115,6 @@
     <ClCompile Include="InputEx.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityForText.cpp" />
-    <ClCompile Include="MobEnemy.cpp" />
-    <ClCompile Include="MobScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />

@@ -109,7 +109,7 @@ void GameScene::Initialize() {
 	AxisIndicator::GetInstance()->SetTargetCamera(&viewProjection_);
 
 	// サウンドデータの読み込み
-	soundDataHandle_ = audio_->LoadWave("Boss.wav");
+	soundDataHandle_ = audio_->LoadWave("sunaarashi.mp3");
 	// 音声再生
 	audio_->PauseWave(soundDataHandle_);
 	// 第2引数でループ再生を指定
@@ -134,22 +134,6 @@ void GameScene::Update() {
 	if (player_->IsDead() == true) {
 	}
 
-	/*#ifdef _DEBUG
-	if (input_->TriggerKey(DIK_SPACE)) {
-		isDebugCameraActive_ = !isDebugCameraActive_;
-	}
-	#endif*/
-
-	//if (isDebugCameraActive_) {
-	//	//debugCamera_->Update();
-	//	viewProjection_.matView = debugCamera_->GetCamera().matView;
-	//	viewProjection_.matProjection = debugCamera_->GetCamera().matProjection;
-	//	viewProjection_.TransferMatrix();
-	//} else {
-	//	viewProjection_.UpdateMatrix();
-	//}
-
-	
 	//自機の弾が敵に当たったとき
 	std::list<PlayerBullet*> playerBullets = player_->GetBullet();
 	for (PlayerBullet* playerBullet : playerBullets) {
@@ -177,11 +161,7 @@ void GameScene::Update() {
 			player_->OnCollision(enemy_);
 
 			HP -= 1;
-			// 仮の生成処理。後で消す
-			/*deathParticles_ = new DeathParticles;
-			deathParticles_->Initialize(modelDeathParticle_, &viewProjection_, worldTransform_.translation_);*/
 		}
-		
 	}
 
 	//パーティクルの更新

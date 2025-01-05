@@ -25,7 +25,7 @@ void DeadScene::Initialize() {
 	worldTransformFont_.scale_ = {2, 2, 2};
 
 	// サウンドデータの読み込み
-	 soundDataHandle_ = audio_->LoadWave("Dead.wav");
+	 soundDataHandle_ = audio_->LoadWave("natsunokiri.mp3");
 	// 音声再生
 	 audio_->PauseWave(soundDataHandle_);
 	// 第2引数でループ再生を指定
@@ -33,7 +33,7 @@ void DeadScene::Initialize() {
 }
 
 void DeadScene::Update() {
-	if (Input::GetInstance()->ReleseKey(DIK_SPACE)) {
+	if (Input::GetInstance()->ReleseKey(DIK_RETURN)) {
 		// 音声停止
 		audio_->StopWave(voiceHandle_);
 		finished_ = true;
