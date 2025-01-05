@@ -109,6 +109,12 @@ void GameScene::Update() {
 		}
 	}
 
+	if (Input::GetInstance()->/*ReleseKey*/ TriggerKey(DIK_RETURN)) {
+		// 音声停止
+		audio_->StopWave(voiceHandle_);
+		finished_ = true;
+	}
+
 }
 
 void GameScene::Draw() {

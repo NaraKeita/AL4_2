@@ -2,7 +2,7 @@
 using namespace KamataEngine;
 #include "ClearScene.h"
 #include "DeadScene.h"
-#include "MobScene.h"
+//#include "MobScene.h"
 #include "TitleScene.h"
 #include "scene/GameScene.h"
 
@@ -27,7 +27,7 @@ GameScene* gameScene = nullptr;
 TitleScene* titleScene = nullptr;
 ClearScene* clearScene = nullptr;
 DeadScene* deadScene = nullptr;
-MobScene* mobScene = nullptr;
+//MobScene* mobScene = nullptr;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -38,7 +38,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Audio* audio = nullptr;
 	AxisIndicator* axisIndicator = nullptr;
 	PrimitiveDrawer* primitiveDrawer = nullptr;
-	GameScene* gameScene = nullptr;
+	//GameScene* gameScene = nullptr;
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
@@ -121,10 +121,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete titleScene;
 	delete clearScene;
 	delete deadScene;
-	delete mobScene;
+	//delete mobScene;
 
 	// 各種解放
-	delete gameScene;
+	//delete gameScene;
 	// 3Dモデル解放
 	Model::StaticFinalize();
 	audio->Finalize();
@@ -145,39 +145,39 @@ void ChangeScene() {
 	case Scene::kTitle:
 		if (titleScene->IsFinished()) {
 			// シーン変更
-			scene = Scene::kMobGame;
+			scene = Scene::kGame;
 			// 旧シーンの開放
 			delete titleScene;
 			titleScene = nullptr;
 			// 新シーンの生成と初期化
-			mobScene = new MobScene;
-			mobScene->Initialize();
-		}
-		break;
-	case Scene::kMobGame:
-		if (mobScene->EnemyIsFinished()) {
-			// シーン変更
-			scene = Scene::kGame;
-			// 旧シーンの開放
-			delete mobScene;
-			mobScene = nullptr;
-			// 新シーンの生成と初期化
 			gameScene = new GameScene;
 			gameScene->Initialize();
-		} else if (mobScene->HP <= 0) {
-			// シーン変更
-			scene = Scene::kDead;
-			// 旧シーンの開放
-			delete mobScene;
-			mobScene = nullptr;
-			// 新シーンの生成と初期化
-			deadScene = new DeadScene;
-			deadScene->Initialize();
 		}
-
 		break;
+	//case Scene::kMobGame:
+	//	if (mobScene->EnemyIsFinished()) {
+	//		// シーン変更
+	//		scene = Scene::kGame;
+	//		// 旧シーンの開放
+	//		delete mobScene;
+	//		mobScene = nullptr;
+	//		// 新シーンの生成と初期化
+	//		gameScene = new GameScene;
+	//		gameScene->Initialize();
+	//	} else if (mobScene->HP <= 0) {
+	//		// シーン変更
+	//		scene = Scene::kDead;
+	//		// 旧シーンの開放
+	//		delete mobScene;
+	//		mobScene = nullptr;
+	//		// 新シーンの生成と初期化
+	//		deadScene = new DeadScene;
+	//		deadScene->Initialize();
+	//	}
+
+	//	break;
 	case Scene::kGame:
-		if (gameScene->enemyHP <= 0) {
+		if (gameScene->IsFinished()) {
 			// シーン変更
 			scene = Scene::kClear;
 			// 旧シーンの開放
@@ -186,16 +186,17 @@ void ChangeScene() {
 			// 新シーンの生成と初期化
 			clearScene = new ClearScene;
 			clearScene->Initialize();
-		} else if (gameScene->HP <= 0) {
-			// シーン変更
-			scene = Scene::kDead;
-			// 旧シーンの開放
-			delete gameScene;
-			gameScene = nullptr;
-			// 新シーンの生成と初期化
-			deadScene = new DeadScene;
-			deadScene->Initialize();
-		}
+		} 
+		//else if (gameScene->HP <= 0) {
+		//	// シーン変更
+		//	scene = Scene::kDead;
+		//	// 旧シーンの開放
+		//	delete gameScene;
+		//	gameScene = nullptr;
+		//	// 新シーンの生成と初期化
+		//	deadScene = new DeadScene;
+		//	deadScene->Initialize();
+		//}
 
 		break;
 	case Scene::kClear:
@@ -230,9 +231,9 @@ void UpdateScene() {
 	case Scene::kTitle:
 		titleScene->Update();
 		break;
-	case Scene::kMobGame:
+	/*case Scene::kMobGame:
 		mobScene->Update();
-		break;
+		break;*/
 	case Scene::kGame:
 		gameScene->Update();
 		break;
@@ -251,9 +252,9 @@ void DrawScene() {
 	case Scene::kTitle:
 		titleScene->Draw();
 		break;
-	case Scene::kMobGame:
-		mobScene->Draw();
-		break;
+	//case Scene::kMobGame:
+	//	mobScene->Draw();
+	//	break;
 	case Scene::kGame:
 		gameScene->Draw();
 		break;

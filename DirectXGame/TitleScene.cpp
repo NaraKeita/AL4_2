@@ -21,7 +21,7 @@ void TitleScene::Initialize() {
 	camera_.Initialize();
 
 	modelFont_ = Model::CreateFromOBJ("titleFont");
-	modelEnemy_ = Model::CreateFromOBJ("enemyOpposition");
+	//modelEnemy_ = Model::CreateFromOBJ("enemyOpposition");
 
 	worldTransformFont_.Initialize();
 	worldTransformPlayer_.Initialize();
@@ -38,12 +38,12 @@ void TitleScene::Initialize() {
 	fade_->Initialize();
 	fade_->Start(Fade::Status::FadeIn, 1);
 
-	// サウンドデータの読み込み
-	soundDataHandle_ = audio_->LoadWave("Title.wav");
-	// 音声再生
-	audio_->PauseWave(soundDataHandle_);
-	// 第2引数でループ再生を指定
-	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+	//// サウンドデータの読み込み
+	////soundDataHandle_ = audio_->LoadWave("Title.wav");
+	//// 音声再生
+	//audio_->PauseWave(soundDataHandle_);
+	//// 第2引数でループ再生を指定
+	//voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 }
 
 void TitleScene::Update() {
