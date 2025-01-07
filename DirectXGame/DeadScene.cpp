@@ -33,13 +33,13 @@ void DeadScene::Initialize() {
 }
 
 void DeadScene::Update() {
-	//if (Input::GetInstance()->ReleseKey(DIK_RETURN)) {
-	//	// 音声停止
-	//	audio_->StopWave(voiceHandle_);
-	//	finished_ = true;
-	//}
-	//// タイマーを加算
-	//timer_ += 1.0f / 60.0f;
+	if (Input::GetInstance()->ReleseKey(DIK_RETURN)) {
+		// 音声停止
+		audio_->StopWave(voiceHandle_);
+		finished_ = true;
+	}
+	// タイマーを加算
+	timer_ += 1.0f / 60.0f;
 
 	worldTransform_.rotation_.z += 0.2f;
 
