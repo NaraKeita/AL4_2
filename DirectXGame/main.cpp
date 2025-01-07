@@ -170,7 +170,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			scene = Scene::kDead;
 			// 旧シーンの開放
 			delete gameScene;
-			gameScene = nullptr;
+			gameScene = nullptr; 
 			// 新シーンの生成と初期化
 			deadScene = new DeadScene;
 			deadScene->Initialize();
