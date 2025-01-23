@@ -6,6 +6,7 @@ using namespace KamataEngine;
 #include "PlayerBullet.h"
 #include "Enemy.h"
 #include "Skydome.h"
+#include "RailCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -62,6 +63,9 @@ private: // メンバ変数
 
 	//SkyDomeのモデル
 	Model* modelSkydome_ = nullptr;
+
+	//RailCamera
+	RailCamera* railCamera_ = nullptr;
 
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;

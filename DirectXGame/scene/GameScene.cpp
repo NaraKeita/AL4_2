@@ -15,6 +15,7 @@ GameScene::~GameScene() {
 	delete debugCamera_;
 	delete enemy_;
 	delete modelSkydome_;
+	delete railCamera_;
 }
 
 void GameScene::Initialize() {
@@ -59,6 +60,9 @@ void GameScene::Initialize() {
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(kNumBlockHorizontal, kNumBlockVirtical);
 
+	//レールカメラ
+	//railCamera_->Initialize();
+
 	//軸方向
 	AxisIndicator::GetInstance()->SetVisible(true);
 	AxisIndicator::GetInstance()->SetTargetCamera(&viewProjection_);
@@ -70,6 +74,7 @@ void GameScene::Update() {
 	player_->Update();
 	debugCamera_->Update();
 	enemy_->Update();
+	railCamera_->Update();
 
 	#ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
