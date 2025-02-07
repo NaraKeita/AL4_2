@@ -1,16 +1,20 @@
 #pragma once
+#include "Affin.h"
+#include <3d/Camera.h>
+#include <DirectXMath.h>
 #include <KamataEngine.h>
-using namespace KamataEngine;
+#include <imgui.h>
 
 class RailCamera {
 public:
-	
-	void Initialize(const Vector3& position,  Camera* camera, const Vector3& rotate);
+	void Initialize(KamataEngine::Vector3 position, KamataEngine::Camera* camera, float radian);
 	void Update();
-	
+	const KamataEngine::WorldTransform& GetWorldTransform() const;
+
+	const KamataEngine::Camera* GetCamera();
+
 private:
-	// ワールド変換データ
-	WorldTransform worldTransform_;
-	//ビュープロジェクション
-	Camera* camera_ = nullptr;
+	KamataEngine::WorldTransform worldTransform_;
+	KamataEngine::Camera* camera_ = nullptr;
+	
 };
